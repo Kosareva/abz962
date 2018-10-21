@@ -1,3 +1,17 @@
-<p>
-  header works!
-</p>
+<header>
+    <div class="d-none d-md-block">
+        <app-main-menu></app-main-menu>
+    </div>
+    <div class="d-md-none">
+        <input type="checkbox" id="appSideNavToggler" (click)="toggleSideNav()">
+        <label for="appSideNavToggler" id="appSideNavDropdown"></label>
+        <div id="appNavbar">
+            <label id="appSideNavTogglerBar" for="appSideNavToggler" class="m-0">
+                <span class="icon-line-menu"></span>
+            </label>
+        </div>
+        <div id="appSideNav">
+            <app-main-menu></app-main-menu>
+        </div>
+    </div>
+</header>
