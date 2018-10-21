@@ -1,7 +1,44 @@
 $font-path: "./assets/fonts";
+$imgs-path: "./assets/imgs";
+$icons-path: "./assets/imgs/icons";
 
 // rewrite bootstrap variables
+// colors
 $theme-colors: (
         "primary": #ef6c00,
         "secondary": #283593,
 );
+
+// grid
+$grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 2560px
+);
+
+$container-max-widths: (
+        sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1440px
+);
+
+// buttons
+$btn-font-weight: 700;
+$btn-border-width: 2px;
+
+// forms
+$input-border-color: #adb5bd;
+$input-focus-border-color: $input-border-color;
+$input-focus-box-shadow: none;
+
+// navbar
+$navbar-dark-color: #fff;
+$navbar-dark-active-color: map_get($theme-colors, primary);
+
+// select
+$app-select-height-sm: 31px;
+$app-select-height: 38px;
+$app-select-height-lg: 48px;

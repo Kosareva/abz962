@@ -1,0 +1,6 @@
+@import "mixins/font-face";
+
+@include font-face("icomoon", "#{$font-path}/icomoon/icomoon");
+@include font-face("overpass", "#{$font-path}/Overpass/Overpass-SemiBold/Overpass-SemiBold", 600);
+@include font-face("source-sans-pro", "#{$font-path}/SourceSansPro/SourceSansPro-Regular/SourceSansPro-Regular");
+@include font-face("source-sans-pro", "#{$font-path}/SourceSansPro/SourceSansPro-Bold/SourceSansPro-Bold", 700);

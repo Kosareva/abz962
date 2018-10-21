@@ -1,0 +1,54 @@
+// heading
+h4 {
+  font: 600 22px overpass;
+}
+
+@include media-breakpoint-up(lg) {
+  h1 {
+    font: 600 50px overpass;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  h1 {
+    font: 600 30px overpass;
+  }
+  h2 {
+    font: 600 26px overpass;
+  }
+  h3 {
+    font: 600 22px overpass;
+  }
+  h5 {
+    font: 400 16px source-sans-pro;
+  }
+}
+
+@include media-breakpoint-only(md) {
+  h1 {
+    font: 600 42px overpass;
+  }
+}
+
+@include media-breakpoint-between(md, xl) {
+  h2 {
+    font: 600 42px overpass;
+  }
+  h3 {
+    font: 600 26px overpass;
+  }
+  h5 {
+    font: 400 18px source-sans-pro;
+  }
+}
+
+// paragraph
+p {
+  font: 400 20px source-sans-pro;
+  &.p2 {
+    font: 400 16px source-sans-pro;
+  }
+  &.p3 {
+    font: 400 14px source-sans-pro;
+  }
+}

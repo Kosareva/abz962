@@ -1,0 +1,32 @@
+// Base class
+//
+// Kickstart any navigation component with a set of style resets. Works with
+// `<nav>`s or `<ul>`s.
+
+.nav-link {
+  color: #000;
+
+  @include hover-focus {
+    color: lighten(map_get($theme-colors, primary), 15);
+  }
+
+  // Disabled state lightens text
+  &.disabled {
+    color: $nav-link-disabled-color;
+  }
+}
+
+footer.footer-dark {
+  .nav-link {
+    color: #fff;
+
+    @include hover-focus {
+      color: map_get($theme-colors, primary);
+    }
+
+    // Disabled state lightens text
+    &.disabled {
+      color: $nav-link-disabled-color;
+    }
+  }
+}

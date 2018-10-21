@@ -2,6 +2,16 @@
 @import "app/theme/variables";
 @import "~bootstrap/scss/bootstrap-reboot";
 @import "~bootstrap/scss/bootstrap-grid";
+@import "~bootstrap/scss/forms";
 @import "~bootstrap/scss/buttons";
-@import "app/theme/icomoon";
+@import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/input-group";
+@import "~bootstrap/scss/custom-forms";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/utilities";
+@import "~@ng-select/ng-select/themes/default.theme.css";
 @import "app/theme/fonts";
+@import "app/theme/icomoon";
+@import "app/theme/typography";
+@import "app/theme/ui_kit/ui-kit";

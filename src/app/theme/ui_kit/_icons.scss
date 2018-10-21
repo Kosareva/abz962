@@ -1,0 +1,21 @@
+[class^='icon'] {
+  &::before {
+    color: map_get($theme-colors, secondary);
+  }
+  &:hover {
+    &::before {
+      color: lighten(map_get($theme-colors, secondary), 15);
+    }
+  }
+}
+
+.icon-on-dark {
+  &::before {
+    color: #fff;
+  }
+  &:hover {
+    &::before {
+      color: map_get($theme-colors, primary);
+    }
+  }
+}

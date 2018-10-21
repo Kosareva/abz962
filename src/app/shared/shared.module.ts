@@ -5,6 +5,7 @@ import {DirectivesModule} from './directives/directives.module';
 import {PipesModule} from './pipes/pipes.module';
 import {UiKitModule} from '@app/shared/ui-kit/ui-kit.module';
 import {NgProgressModule} from '@ngx-progressbar/core';
+import {NgSelectModule} from '@ng-select/ng-select';
 
 @NgModule({
     imports: [
@@ -12,6 +13,7 @@ import {NgProgressModule} from '@ngx-progressbar/core';
         ComponentsModule,
         DirectivesModule,
         NgProgressModule.forRoot(),
+        NgSelectModule,
         PipesModule,
         UiKitModule,
     ],
@@ -20,6 +22,7 @@ import {NgProgressModule} from '@ngx-progressbar/core';
         ComponentsModule,
         DirectivesModule,
         NgProgressModule,
+        NgSelectModule,
         PipesModule,
         UiKitModule,
     ],

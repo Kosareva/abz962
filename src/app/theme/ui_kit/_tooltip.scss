@@ -1,0 +1,36 @@
+/* Tooltip container */
+.app-tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Tooltip text */
+.app-tooltip .app-tooltiptext {
+  visibility: hidden;
+  width: auto;
+  max-width: 80vw;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+  box-shadow: $box-shadow;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  top: 125%;
+  left: 80%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.app-tooltip:hover .app-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}

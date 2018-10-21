@@ -1,0 +1,108 @@
+@mixin app-input-focus {
+  -webkit-box-shadow: 0px 0px 0px 2px $input-border-color;
+  -moz-box-shadow: 0px 0px 0px 2px $input-border-color;
+  box-shadow: 0px 0px 0px 2px $input-border-color;
+}
+
+.label-float {
+  background: $input-bg;
+  color: $input-border-color;
+  border-radius: $input-border-radius;
+  position: absolute;
+  transform: translate(calc(#{$input-padding-x} - 4px), -50%);
+  padding-left: 5px;
+  padding-right: 5px;
+  &-sm {
+    @include border-radius($input-border-radius-sm);
+    transform: translate(calc(#{$input-padding-x-sm} - 5px), -50%);
+  }
+  &-lg {
+    @include border-radius($input-border-radius-lg);
+    transform: translate(calc(#{$input-padding-x-lg} - 5px), -50%);
+  }
+}
+
+.form-control {
+  &:disabled,
+  &[readonly] {
+    .label-float {
+      background-color: $input-disabled-bg;
+    }
+  }
+  &:focus {
+    @include app-input-focus;
+  }
+}
+
+select:not([multiple]) {
+  -moz-appearance: none !important; /* Firefox */
+  -webkit-appearance: none !important; /* Safari and Chrome */
+  appearance: none !important;
+  background: url("#{$icons-path}/caret-down.svg") !important;
+  background-repeat: no-repeat !important;
+  background-position: calc(100% - 16px) center !important;
+}
+
+.ng-select.app-select {
+  height: $app-select-height;
+  .ng-select-container {
+    border: none;
+    box-shadow: $box-shadow-sm;
+    height: 100%;
+  }
+  &.ng-select-focused {
+    .ng-select-container {
+      box-shadow: none;
+      border: none;
+    }
+  }
+  .ng-arrow {
+    visibility: hidden;
+  }
+  .ng-select-container {
+    color: map_get($theme-colors, primary);
+    min-height: $app-select-height-sm;
+  }
+  .ng-option {
+    height: $app-select-height;
+    display: flex !important;
+    align-items: center;
+    &-marked, &-selected {
+      background-color: lighten(map_get($theme-colors, primary), 40) !important;
+    }
+  }
+  .ng-input {
+    height: calc(#{$app-select-height} - 12px);
+    input {
+      height: 100%;
+    }
+  }
+  .ng-value-container {
+    height: calc(#{$app-select-height} - 12px);
+  }
+  &-sm {
+    height: $app-select-height-sm;
+    .ng-input {
+      height: calc(#{$app-select-height-sm} - 12px);
+    }
+    .ng-option {
+      height: $app-select-height-sm;
+    }
+    .ng-value-container {
+      height: calc(#{$app-select-height-sm} - 12px);
+    }
+  }
+  &-lg {
+    height: $app-select-height-lg;
+    .ng-input {
+      height: calc(#{$app-select-height-lg} - 12px);
+    }
+    .ng-option {
+      height: $app-select-height-lg;
+    }
+    .ng-value-container {
+      height: calc(#{$app-select-height-lg} - 12px);
+    }
+  }
+
+}
