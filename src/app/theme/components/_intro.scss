@@ -1,9 +1,5 @@
 app-intro {
-  @include clearfix;
-  @include make-container;
-  padding-top: $grid-gutter-width * 4;
-  padding-bottom: $grid-gutter-width * 4;
-  background: url("#{$imgs-path}/bg-1.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
+  .app-section {
+    background-image: url("#{$imgs-path}/bg-1.jpg");
+  }
 }

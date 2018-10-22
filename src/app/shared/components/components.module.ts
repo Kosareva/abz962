@@ -4,11 +4,13 @@ import {FooterComponent} from '@app/shared/components/footer/footer.component';
 import {CommonModule} from '@angular/common';
 import {MainMenuModule} from '@app/shared/components/main-menu/main-menu.module';
 import {LogoComponent} from './logo/logo.component';
+import {IconBoxComponent} from './icon-box/icon-box.component';
 
 @NgModule({
     declarations: [
-        HeaderComponent,
         FooterComponent,
+        HeaderComponent,
+        IconBoxComponent,
         LogoComponent,
     ],
     imports: [
@@ -16,8 +18,10 @@ import {LogoComponent} from './logo/logo.component';
         MainMenuModule,
     ],
     exports: [
-        HeaderComponent,
         FooterComponent,
+        HeaderComponent,
+        IconBoxComponent,
+        LogoComponent,
         MainMenuModule,
     ],
 })

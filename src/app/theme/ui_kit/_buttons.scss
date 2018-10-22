@@ -35,6 +35,16 @@
 
 }
 
+.btn-moved-left{
+  margin-left: calc(#{-$btn-padding-x} - #{$btn-border-width});
+  &.btn-lg {
+    margin-left: calc(#{-$btn-padding-x-lg} - #{$btn-border-width});
+  }
+  &.btn-sm {
+    margin-left: calc(#{-$btn-padding-x-sm} - #{$btn-border-width});
+  }
+}
+
 .btn-with-min-width {
   width: 100%;
 }

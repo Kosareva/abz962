@@ -5,7 +5,6 @@ import {HomeComponent} from '@app/views/home/home.component';
 import {IntroComponent} from '@app/views/home/intro/intro.component';
 import {RegistrationComponent} from './registration/registration.component';
 import {RequirementsComponent} from '@app/views/home/requirements/requirements.component';
-import {RelationshipsComponent} from './relationships/relationships.component';
 import {SharedModule} from '@app/shared/shared.module';
 import {UsersComponent} from './users/users.component';
 
@@ -15,7 +14,6 @@ import {UsersComponent} from './users/users.component';
         HomeComponent,
         IntroComponent,
         RegistrationComponent,
-        RelationshipsComponent,
         RequirementsComponent,
         UsersComponent,
     ],
