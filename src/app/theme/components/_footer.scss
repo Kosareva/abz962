@@ -1,5 +1,23 @@
-app-footer{
+app-footer {
   @include clearfix;
   width: 100%;
   background: map_get($theme-colors, secondary);
+}
+
+@include media-breakpoint-down(sm) {
+  app-footer {
+    app-main-menu {
+      justify-content: center !important;
+      display: flex !important;
+      ul {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        a{
+          text-align: center;
+          line-height: 0.7;
+        }
+      }
+    }
+  }
 }

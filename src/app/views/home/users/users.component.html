@@ -1,13 +1,13 @@
 <section class="app-section">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-10">
                 <h2 class="text-center">Our cheerful users</h2>
                 <h5 class="text-center">Attention! Sorting users by registration date</h5>
             </div>
             <div class="w-100 mb-5"></div>
             <app-users-item
-                    class="col-12 col-lg-4 mb-5"
+                    class="col-12 col-md-4 mb-5"
                     *ngFor="let i of [1,2,3,4,5,6]"
                     [src]="'./assets/imgs/logo/logo.svg'"
                     [title]="'Noah De Noah Noahovich Noahovna'"
@@ -16,7 +16,7 @@
                             '+38 (050) 678 03 24']">
             </app-users-item>
             <div class="col-12 text-center">
-            <button class="btn btn-outline-primary btn-with-min-width">Show more</button>
+            <button class="btn btn-sm btn-outline-primary btn-with-min-width">Show more</button>
             </div>
         </div>
     </div>

@@ -1,46 +1,50 @@
 <section class="app-section">
     <div id="about-me" class="container mb-5">
         <div class="row justify-content-center">
-            <div class="col col-md-6">
-                <h2 class="text-center mb-5">Let's get ac quainted</h2>
+            <div class="col col-md-8">
+                <h2 class="text-center mb-3 mb-md-4">Let's get ac quainted</h2>
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-lg-4 text-center">
-                <img src="./assets/imgs/man-mobile.svg" alt="Let's get acquainted">
+            <div class="col-12 col-sm-4 text-center pr-5 pl-5 pl-md-0 pr-md-0 mb-4">
+                <img src="./assets/imgs/man-mobile.svg" alt="Let's get acquainted" class="img-fluid">
             </div>
-            <div class="col">
-                <h3>I am cool frontend developer</h3>
-                <p class="p2 mb-4">When real users have a slow experience on mobile, they're much less likely to find what
+            <div class="col-12 col-sm-8">
+                <h3 class="text-center text-md-left ml-3 mr-3 ml-md-0 mr-md-0">I am cool frontend developer</h3>
+                <p class="p2 mb-4 text-center text-md-left">When real users have a slow experience on mobile, they're
+                    much less likely to find
+                    what
                     they are
                     looking for or purchase from you in the future. For many sites this equates to a huge missed
                     opportunity, especially when more than half of visits are abandoned if a mobile page takes over 3
                     seconds to load.
                 </p>
-                <p class="p2">Last week, Google Search and Ads teams announced two new speed initiatives to help improve
-                    user-experience on the web.</p>
-                <button class="btn btn-link btn-moved-left">Sign Up</button>
+                <p class="p2 text-center text-md-left">Last week, Google Search and Ads teams announced two new speed
+                    initiatives to help improve user-experience on the web.</p>
+                <div class="text-center text-md-left">
+                    <button class="btn btn-link btn-moved-left">Sign Up</button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="w-100 pt-4"></div>
+    <div class="w-100 pt-1 pt-lg-5 pb-lg-0"></div>
     <div id="relationships" class="container">
         <div class="row  justify-content-center">
-            <div class="col col-md-6">
-                <h2 class="text-center mb-5">About my relationships with web-development</h2>
+            <div class="col-12 col-sm-10 col-lg-8">
+                <h2 class="text-center mb-3 mb-lg-5">About my relationships with web-development</h2>
             </div>
             <div class="w-100"></div>
-            <app-icon-box class="col-12 col-md"
+            <app-icon-box class="col-10 col-lg-4"
                           [src]="'./assets/imgs/html.svg'"
                           [title]="'I\'m in love with HTML'"
                           [text]="'Hypertext Markup Language (HTML) is the standard markup language for creating web pages and web applications.'"
             ></app-icon-box>
-            <app-icon-box class="col-12 col-md"
+            <app-icon-box class="col-10 col-lg-4"
                           [src]="'./assets/imgs/css.svg'"
                           [title]="'CSS is my best friend'"
                           [text]="'Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language like HTML.'"
             ></app-icon-box>
-            <app-icon-box class="col-12 col-md"
+            <app-icon-box class="col-10 col-lg-4"
                           [src]="'./assets/imgs/javascript.svg'"
                           [title]="'JavaScript is my passion'"
                           [text]="'JavaScript is a high-level, interpreted programming language. It is a language which is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm.'"
