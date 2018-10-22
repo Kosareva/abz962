@@ -1,4 +1,4 @@
-@import "mixins/font-face";
+@import "ui_kit/mixins/font-face";
 
 @include font-face("icomoon", "#{$font-path}/icomoon/icomoon");
 @include font-face("overpass", "#{$font-path}/Overpass/Overpass-SemiBold/Overpass-SemiBold", 600);

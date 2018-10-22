@@ -1,0 +1,5 @@
+app-footer{
+  @include clearfix;
+  width: 100%;
+  background: map_get($theme-colors, secondary);
+}

@@ -34,3 +34,16 @@
   }
 
 }
+
+.btn-with-min-width {
+  width: 100%;
+}
+
+@include media-breakpoint-up(sm) {
+  .btn-with-min-width {
+    width: auto;
+    min-width: 290px;
+  }
+}
+
+
