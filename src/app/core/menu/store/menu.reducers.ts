@@ -29,12 +29,6 @@ const initialState: State = [
         forUnauthorized: true,
     },
     {
-        title: 'Sign In',
-        route: '#sign-in',
-        forAuthorized: false,
-        forUnauthorized: true,
-    },
-    {
         title: 'Sign Up',
         route: '#sign-up',
         forAuthorized: true,

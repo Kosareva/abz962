@@ -1,18 +1,18 @@
 <header class="app-header">
-    <div class="d-none d-md-block container navbar">
+    <div class="d-none d-md-block container pt-2 pb-2">
         <nav class="row">
-            <div class="col-2 d-flex align-items-center">
+            <div class="col-3 d-flex align-items-center">
                 <app-logo class="navbar-brand"></app-logo>
             </div>
             <div class="col">
                 <app-main-menu></app-main-menu>
             </div>
-            <div class="col-3 d-flex align-items-center justify-content-end">
-                <div class="pr-2">
+            <div class="col-3 d-flex align-items-center justify-content-end pr-0">
+                <div class="pr-3">
                     <p class="m-0 p3">Name</p>
                     <p class="m-0 p4 text-muted">email</p>
                 </div>
-                <img src="./assets/imgs/logo/logo.svg" class="img-thumbnail rounded-circle user-avatar">
+                <img src="./assets/imgs/logo/logo.svg" class="img-thumbnail rounded-circle user-avatar mr-1">
                 <button class="btn btn-link d-flex align-items-center"><span class="icon-sign-out"></span></button>
             </div>
         </nav>
@@ -22,7 +22,7 @@
         <label for="appSideNavToggler" id="appSideNavDropdown"></label>
         <div id="appNavbar" class="w-100">
             <app-logo class="navbar-brand float-left"></app-logo>
-            <label id="appSideNavTogglerBar" for="appSideNavToggler" class="m-0 float-right">
+            <label id="appSideNavTogglerBar" for="appSideNavToggler" class="m-0 float-right btn-link">
                 <span class="icon-line-menu"></span>
             </label>
         </div>

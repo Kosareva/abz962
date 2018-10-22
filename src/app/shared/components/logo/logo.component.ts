@@ -1,5 +1,4 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {APP_CONFIG, AppConfig} from '@app/app.config';
 
 @Component({
     selector: 'app-logo',
@@ -8,9 +7,7 @@ import {APP_CONFIG, AppConfig} from '@app/app.config';
 })
 export class LogoComponent implements OnInit {
 
-    constructor(
-        @Inject(APP_CONFIG) public appConfig: AppConfig
-    ) {
+    constructor() {
     }
 
     ngOnInit() {

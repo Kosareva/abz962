@@ -1,0 +1,11 @@
+app-logo {
+  svg {
+    height: 25px;
+  }
+}
+
+.on-dark app-logo, app-logo.on-dark {
+  svg [class^='cls'] {
+    fill: #fff;
+  }
+}

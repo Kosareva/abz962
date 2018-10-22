@@ -1,22 +1,33 @@
 [class^='icon'] {
-  font-size: 20px;
+  font-size: 25px;
   &::before {
     color: map_get($theme-colors, secondary);
-  }
-  &:hover {
-    &::before {
-      color: lighten(map_get($theme-colors, secondary), 15);
-    }
   }
 }
 
 .on-dark {
-  &::before {
-    color: #fff;
-  }
-  &:hover {
+  [class^='icon'] {
     &::before {
-      color: map_get($theme-colors, primary);
+      color: #fff;
+    }
+  }
+  .btn-link {
+    &:hover {
+      [class^='icon'] {
+        &::before {
+          color: map_get($theme-colors, primary);
+        }
+      }
+    }
+  }
+}
+
+.btn-link {
+  &:hover {
+    [class^='icon'] {
+      &::before {
+        color: lighten(map_get($theme-colors, secondary), 15);
+      }
     }
   }
 }

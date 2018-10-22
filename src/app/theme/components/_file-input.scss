@@ -1,0 +1,22 @@
+app-file-input{
+  input{
+    display: none;
+  }
+  .app-pseudo-file-input{
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: $input-placeholder-color;
+    cursor: default;
+  }
+  .btn{
+    position: absolute;
+    right: -$input-border-width;
+    top: -$input-border-width;
+    bottom: -$input-border-width;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding-right: $btn-padding-x * 2.5;
+    padding-left: $btn-padding-x * 2.5;
+  }
+}

@@ -1,11 +1,12 @@
 app-users-item {
   .user-avatar {
-    height: 60px;
-    width: 60px;
+    height: 70px;
+    width: 70px;
     float: left;
     display: inline;
   }
   .text{
+    margin-top: 22px;
     overflow: hidden;
   }
 }

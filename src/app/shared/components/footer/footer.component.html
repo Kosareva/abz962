@@ -1,5 +1,36 @@
-<footer class="container on-dark">
-    <div class="row">
-        <app-main-menu></app-main-menu>
+<footer class="on-dark pt-3 pb-3">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-auto">
+                <app-logo></app-logo>
+            </div>
+            <app-main-menu></app-main-menu>
+        </div>
+        <hr class="mt-4 mb-4">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-4">
+                <p class="d-flex align-items-center"><span class="icon-mail pr-2"></span><span class="text-truncate">work.of.future@gmail.com</span></p>
+                <p class="d-flex align-items-center"><span class="icon-cellphone pr-2 pt-1"></span>+38 (050) 789 24 98
+                </p>
+                <p class="d-flex align-items-center"><span class="icon-phone pr-2 pt-1"></span>+38 (095) 556 08 45</p>
+            </div>
+            <div class="col-6 col-sm-3 col-lg-2" *ngFor="let col of [1,4,8,12]">
+                <ng-container *ngFor="let item of [col,col+1,col+2,col+3]">
+                    <p class="p2 mb-2 text-left text-lg-right">Menu item #{{item}}</p>
+                </ng-container>
+            </div>
+            <div class="w-100"></div>
+        </div>
+        <div class="row justify-content-between align-items-center">
+            <div class="col-auto">
+                <p class="p4 mt-4">© abz.agency specially for the test task</p>
+            </div>
+            <div class="col-auto pr-0 d-flex">
+                <ng-container
+                        *ngFor="let icon of ['icon-facebook', 'icon-instagram', 'icon-linkedin' ,'icon-pinterest' ,'icon-twitter']">
+                    <button class="btn btn-link d-flex align-items-center"><span [class]="icon"></span></button>
+                </ng-container>
+            </div>
+        </div>
     </div>
 </footer>

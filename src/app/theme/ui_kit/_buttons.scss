@@ -15,6 +15,16 @@
   }
 }
 
+.btn {
+  font-size: $font-size-base * 1.25;
+  &-sm {
+    font-size: $font-size-sm * 1.25;
+  }
+  &-lg {
+    font-size: $font-size-lg * 1.25;
+  }
+}
+
 //
 // Link buttons
 //
@@ -35,7 +45,7 @@
 
 }
 
-.btn-moved-left{
+.btn-moved-left {
   margin-left: calc(#{-$btn-padding-x} - #{$btn-border-width});
   &.btn-lg {
     margin-left: calc(#{-$btn-padding-x-lg} - #{$btn-border-width});

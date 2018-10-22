@@ -1,0 +1,37 @@
+<form class="row">
+    <div class="col-12 col-lg-4 mb-4">
+        <div class="form-group">
+            <label for="name" class="label-float">Name</label>
+            <input type="text" class="form-control form-control-lg" id="name" placeholder="Your name">
+        </div>
+    </div>
+    <div class="col-12 col-lg-4 mb-4">
+        <div class="form-group">
+            <label for="email" class="label-float">Email</label>
+            <input type="email" class="form-control form-control-lg" id="email" placeholder="Your email">
+        </div>
+    </div>
+    <div class="col-12 col-lg-4 mb-4">
+        <div class="form-group">
+            <label for="phone" class="label-float">Phone</label>
+            <input type="tel" class="form-control form-control-lg" id="phone" placeholder="+38(___) ___ __ __">
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 mb-4">
+        <div class="form-group">
+            <select name="position" class="form-control form-control-lg">
+                <ng-container *ngFor="let val of [1,2,3,4,5,6]">
+                    <option [value]="val">{{val}}</option>
+                </ng-container>
+            </select>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 mb-4">
+        <div class="form-group">
+            <app-file-input></app-file-input>
+        </div>
+    </div>
+    <div class="col-12 text-center mt-4">
+        <button type="submit" class="btn btn-with-min-width" disabled>Sign Up</button>
+    </div>
+</form>
