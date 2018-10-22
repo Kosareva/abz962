@@ -2,15 +2,17 @@ import {InjectionToken, isDevMode} from '@angular/core';
 
 export interface AppConfig {
     apiEndpoint: string;
+    logo: string;
+    siteName: string;
 }
 
 export const CONFIG_OBJ_DEV: AppConfig = {
-    apiEndpoint: 'https://dev'
+    apiEndpoint: 'https://dev',
+    logo: './assets/imgs/logo/logo.svg',
+    siteName: 'ABZ'
 };
 
-export const CONFIG_OBJ_PROD: AppConfig = {
-    apiEndpoint: 'https://prod'
-};
+export const CONFIG_OBJ_PROD: AppConfig = Object.create(CONFIG_OBJ_DEV);
 
 class AppConfigFactory {
     constructor() {

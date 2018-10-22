@@ -1,17 +1,39 @@
-<header>
-    <div class="d-none d-md-block">
-        <app-main-menu></app-main-menu>
+<header class="app-header">
+    <div class="d-none d-md-block container">
+        <nav class="row">
+            <div class="col-3 d-flex align-items-center">
+                <app-logo class="navbar-brand"></app-logo>
+            </div>
+            <div class="col">
+                <app-main-menu></app-main-menu>
+            </div>
+            <div class="col-3 d-flex align-items-center">
+                <div class="pr-2">
+                    <p class="m-0 p3">Name</p>
+                    <p class="m-0 p4 text-muted">email</p>
+                </div>
+                <img src="./assets/imgs/logo/logo.svg" class="img-thumbnail rounded-circle user-avatar">
+                <button class="btn btn-link d-flex align-items-center"><span class="icon-sign-out"></span></button>
+            </div>
+        </nav>
     </div>
-    <div class="d-md-none">
+    <div class="d-md-none w-100 navbar container">
         <input type="checkbox" id="appSideNavToggler" (click)="toggleSideNav()">
         <label for="appSideNavToggler" id="appSideNavDropdown"></label>
-        <div id="appNavbar">
-            <label id="appSideNavTogglerBar" for="appSideNavToggler" class="m-0">
+        <div id="appNavbar" class="w-100">
+            <app-logo class="navbar-brand float-left"></app-logo>
+            <label id="appSideNavTogglerBar" for="appSideNavToggler" class="m-0 float-right">
                 <span class="icon-line-menu"></span>
             </label>
         </div>
         <div id="appSideNav">
-            <app-main-menu></app-main-menu>
+            <div class="container-fluid">
+                <img src="./assets/imgs/logo/logo.svg" class="img-thumbnail rounded-circle user-avatar mb-3 mt-4">
+                <p class="m-0">Name</p>
+                <p class="p2 mb-4">email@email.com</p>
+            </div>
+            <hr>
+            <app-main-menu class="app-menu mt-2"></app-main-menu>
         </div>
     </div>
 </header>
