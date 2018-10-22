@@ -1,3 +1,21 @@
-<p>
-  users works!
-</p>
+<section class="app-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center">Our cheerful users</h2>
+                <h5 class="text-center">Attention! Sorting users by registration date</h5>
+            </div>
+            <div class="w-100 mb-5"></div>
+            <app-users-item
+                    class="col-12 col-lg-4 mb-4"
+                    *ngFor="let i of [1,2,3,4,5,6]"
+                    [src]="'./assets/imgs/logo/logo.svg'"
+                    [title]="'Noah'"
+                    [text]="['Leading specialist of the Control Department',
+                            'noah.controldepartment@gmail.com',
+                            '+38 (050) 678 03 24']">
+            </app-users-item>
+            <button class="btn btn-outline-primary btn-with-min-width mt-5">Show more</button>
+        </div>
+    </div>
+</section>

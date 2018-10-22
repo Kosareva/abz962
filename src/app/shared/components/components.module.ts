@@ -5,6 +5,7 @@ import {CommonModule} from '@angular/common';
 import {MainMenuModule} from '@app/shared/components/main-menu/main-menu.module';
 import {LogoComponent} from './logo/logo.component';
 import {IconBoxComponent} from './icon-box/icon-box.component';
+import {UsersItemComponent} from './users-item/users-item.component';
 
 @NgModule({
     declarations: [
@@ -12,6 +13,7 @@ import {IconBoxComponent} from './icon-box/icon-box.component';
         HeaderComponent,
         IconBoxComponent,
         LogoComponent,
+        UsersItemComponent,
     ],
     imports: [
         CommonModule,
@@ -23,6 +25,7 @@ import {IconBoxComponent} from './icon-box/icon-box.component';
         IconBoxComponent,
         LogoComponent,
         MainMenuModule,
+        UsersItemComponent,
     ],
 })
 export class ComponentsModule {
