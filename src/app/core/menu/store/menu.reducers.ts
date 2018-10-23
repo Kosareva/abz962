@@ -34,12 +34,6 @@ const initialState: State = [
         forAuthorized: true,
         forUnauthorized: true,
     },
-    {
-        title: 'Sign Out',
-        route: '#',
-        forAuthorized: true,
-        forUnauthorized: false,
-    },
 ];
 
 function menuFactory(isAuthorized: boolean) {

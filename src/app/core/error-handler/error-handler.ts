@@ -2,6 +2,13 @@ import {Injectable} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {HttpErrorResponse} from '@angular/common/http';
 
+export class AppError extends Error {
+    constructor(m: string) {
+        super(m);
+        Object.setPrototypeOf(this, AppError.prototype);
+    }
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -31,6 +38,10 @@ export class AppErrorHandler {
             }
         } else {
             // Handle Client Error (Angular Error, ReferenceError...)
+        }
+
+        if (error instanceof AppError) {
+            msg = error.message;
         }
 
         console.error(error);

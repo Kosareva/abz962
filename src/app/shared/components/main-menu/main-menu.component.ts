@@ -11,7 +11,7 @@ import * as fromMenu from '@app/core/menu/store/menu.reducers';
 })
 export class MainMenuComponent implements OnInit {
 
-    menu: Observable<fromMenu.State>;
+    menuState$: Observable<fromMenu.State>;
 
     constructor(
         private store: Store<fromApp.AppState>,
@@ -19,7 +19,7 @@ export class MainMenuComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.menu = this.store.select('mainMenu');
+        this.menuState$ = this.store.select('mainMenu');
     }
 
 }
