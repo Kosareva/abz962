@@ -10,19 +10,21 @@ $theme-colors: (
 );
 
 // grid
+$grid-gutter-width: 30px;
+
 $grid-breakpoints: (
         xs: 0,
         sm: 576px,
-        md: 798px,
-        lg: 1022px,
-        xl: 1230px
+        md: 768px,
+        lg: 992px,
+        xl: 1200px
 );
 
 $container-max-widths: (
-        sm: 540px,
-        md: 750px,
-        lg: 990px,
-        xl: 1170px
+        sm:540px + $grid-gutter-width,
+        md: 720px + $grid-gutter-width,
+        lg: 960px + $grid-gutter-width,
+        xl: 1140px + $grid-gutter-width
 );
 
 // base font

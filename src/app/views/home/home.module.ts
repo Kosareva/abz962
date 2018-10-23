@@ -7,6 +7,7 @@ import {RegistrationComponent} from './registration/registration.component';
 import {RequirementsComponent} from '@app/views/home/requirements/requirements.component';
 import {SharedModule} from '@app/shared/shared.module';
 import {UsersComponent} from './users/users.component';
+import {RelationshipsComponent} from './relationships/relationships.component';
 
 @NgModule({
     declarations: [
@@ -16,6 +17,7 @@ import {UsersComponent} from './users/users.component';
         RegistrationComponent,
         RequirementsComponent,
         UsersComponent,
+        RelationshipsComponent,
     ],
     imports: [SharedModule],
     exports: [],

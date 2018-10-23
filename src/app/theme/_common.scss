@@ -3,12 +3,18 @@
   padding-bottom: $grid-gutter-width * 4.5;
   background-size: cover;
   background-repeat: no-repeat;
+  &-internal {
+    padding-bottom: 0;
+  }
 }
 
 @include media-breakpoint-down(lg) {
-  .app-section {
+  .app-section:not(.app-section-internal) {
     padding-top: $grid-gutter-width * 4;
     padding-bottom: $grid-gutter-width * 4;
+    &-internal {
+      padding-bottom: 0;
+    }
   }
 }
 
@@ -16,5 +22,8 @@
   .app-section {
     padding-top: $grid-gutter-width * 2;
     padding-bottom: $grid-gutter-width * 2;
+    &-internal {
+      padding-bottom: 0;
+    }
   }
 }

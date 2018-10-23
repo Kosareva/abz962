@@ -36,7 +36,7 @@ const initialState: State = [
     },
     {
         title: 'Sign Out',
-        route: '#sign-out',
+        route: '#',
         forAuthorized: true,
         forUnauthorized: false,
     },

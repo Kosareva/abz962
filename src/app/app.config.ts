@@ -7,7 +7,7 @@ export interface AppConfig {
 }
 
 export const CONFIG_OBJ_DEV: AppConfig = {
-    apiEndpoint: 'https://dev',
+    apiEndpoint: 'https://frontend-test-assignment-api.abz.agency/api/v1',
     logo: './assets/imgs/logo/logo.svg',
     siteName: 'ABZ'
 };
