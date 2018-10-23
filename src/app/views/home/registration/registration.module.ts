@@ -8,6 +8,7 @@ import {positionsReducer} from '@app/views/home/registration/store/positions.red
 import {RegistrationFormComponent} from '@app/views/home/registration/registration-form/registration-form.component';
 import {EffectsModule} from '@ngrx/effects';
 import {PositionsEffects} from '@app/views/home/registration/store/positions.effects';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import {PositionsEffects} from '@app/views/home/registration/store/positions.eff
         CommonModule,
         SharedModule,
         StoreModule.forFeature('positions', positionsReducer),
-        EffectsModule.forFeature([PositionsEffects])
+        EffectsModule.forFeature([PositionsEffects]),
+        ReactiveFormsModule,
     ],
     exports: [RegistrationComponent],
     providers: [],

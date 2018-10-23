@@ -1,6 +1,10 @@
 <div class="app-pseudo-file-input form-control form-control-lg">
-    <input type="file" [id]="id" #fileInput>
-    <span>Upload your photo</span>
-    <button type="button" class="btn btn-outline-primary d-none d-md-block" (click)="trigger()">Upload</button>
+    <input type="file" #fileInput (change)="onChange($event)">
+    <span>{{fileName}}</span>
+    <div class="file-input-btns-container">
+        <button type="button" class="btn btn-outline-primary btn-upload d-none d-md-block" (click)="trigger()">Upload</button>
+        <button *ngIf="fileInput.files.length" type="button" class="btn btn-link btn-delete" (click)="deleteFile()">x
+        </button>
+    </div>
     <button type="button" class="btn btn-outline-primary icon-upload d-md-none" (click)="trigger()"></button>
 </div>

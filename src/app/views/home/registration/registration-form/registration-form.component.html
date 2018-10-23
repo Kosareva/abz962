@@ -1,26 +1,32 @@
-<form class="row" *ngIf="(positionsState$ | async).positions.length; else loader">
+<form class="row"
+      *ngIf="(positionsState$ | async).positions.length; else loader"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+>
     <div class="col-12 col-md-4 mb-4">
         <div class="form-group">
-            <label for="name" class="label-float">Name</label>
-            <input type="text" class="form-control form-control-lg" id="name" placeholder="Your name">
+            <label class="label-float">Name</label>
+            <input type="text" class="form-control form-control-lg" formControlName="name" placeholder="Your name">
         </div>
     </div>
     <div class="col-12 col-md-4 mb-4">
         <div class="form-group">
-            <label for="email" class="label-float">Email</label>
-            <input type="email" class="form-control form-control-lg" id="email" placeholder="Your email">
+            <label class="label-float">Email</label>
+            <input type="email" class="form-control form-control-lg" formControlName="email" placeholder="Your email">
         </div>
     </div>
     <div class="col-12 col-md-4 mb-4">
         <div class="form-group">
-            <label for="phone" class="label-float">Phone</label>
-            <input type="tel" class="form-control form-control-lg" id="phone" placeholder="+38(___) ___ __ __">
+            <label class="label-float">Phone</label>
+            <input type="tel" class="form-control form-control-lg" formControlName="phone"
+                   placeholder="+38(___) ___ __ __">
         </div>
     </div>
     <div class="col-12 col-md-6 mb-4">
         <div class="form-group">
-            <select name="position" class="form-control form-control-lg">
-                <option *ngFor="let position of (positionsState$ | async).positions" [value]="position.name">
+            <select formControlName="position_id" class="form-control form-control-lg">
+                <option disabled value="">--Select position--</option>
+                <option *ngFor="let position of (positionsState$ | async).positions" [value]="position.id">
                     {{position.name}}
                 </option>
             </select>
@@ -28,14 +34,19 @@
     </div>
     <div class="col-12 col-md-6 mb-4">
         <div class="form-group">
-            <app-file-input></app-file-input>
+            <app-file-input formControlName="photo" [placeholder]="'Upload your photo'"></app-file-input>
         </div>
     </div>
     <div class="col-12 text-center mt-4">
-        <!--<button type="submit" class="btn btn-sm btn-with-min-width" disabled>Sign Up</button>-->
-        <button type="button" class="btn btn-sm btn-with-min-width" (click)="signUp()">Sign Up</button>
+        <button type="submit" class="btn btn-sm btn-with-min-width" [disabled]="!form.valid" (click)="signUp()">Sign
+            Up
+        </button>
     </div>
 </form>
-<ng-template #loader>Form Loading...</ng-template>
+<ng-template #loader>
+    <div style="height: 240px; display: flex; align-items: center; justify-content: center; background: #f8f8f8; -webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;">
+        Form Loading...
+    </div>
+</ng-template>
 
 
