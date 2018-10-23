@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
-import {MainMenuComponent} from '@app/shared/components/main-menu/main-menu.component';
 import {StoreModule} from '@ngrx/store';
-import {authReducer} from '@app/core/auth/store/auth.reducers';
 import {CommonModule} from '@angular/common';
-import {menuReducer} from '@app/core/menu/store/menu.reducers';
 import {RouterModule} from '@angular/router';
+import {authReducer} from '@app/core/auth/store/auth.reducers';
+import {menuReducer} from '@app/core/menu/store/menu.reducers';
+import {MainMenuComponent} from '@app/shared/components/main-menu/main-menu.component';
 
 @NgModule({
     declarations: [MainMenuComponent],

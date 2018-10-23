@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
-import * as fromApp from '@app/store/app.reducers';
-import * as fromMenu from '@app/core/menu/store/menu.reducers';
+import * as fromApp from '../../../store/app.reducers';
+import * as fromMenu from '../../../core/menu/store/menu.reducers';
 
 @Component({
     selector: 'app-main-menu',
