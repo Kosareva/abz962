@@ -20,6 +20,11 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
                 ...state,
                 isAuthorized: false
             };
+        case (AuthActions.SIGNUP):
+            return {
+                ...state,
+                isAuthorized: false
+            };
         default:
             return state;
     }

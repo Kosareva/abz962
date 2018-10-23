@@ -34,6 +34,8 @@ export function applicantsReducer(state: ApplicantsState = initialState, action:
                     prev_url: action.payload.links.prev_url
                 }
             };
+        case (ApplicantsActions.UNSET_APPLICANTS):
+            return initialState;
         default:
             return state;
     }

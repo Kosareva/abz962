@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import * as fromApp from '@app/store/app.reducers';
 import * as fromPositions from '@app/views/home/registration/store/positions.reducers';
 import * as PositionsActions from '@app/views/home/registration/store/positions.actions';
+import * as AuthActions from '@app/core/auth/store/auth.actions';
 
 @Component({
     selector: 'app-registration-form',
@@ -22,6 +23,10 @@ export class RegistrationFormComponent implements OnInit {
     ngOnInit() {
         this.store.dispatch(new PositionsActions.TryGetPositions());
         this.positionsState$ = this.store.select('positions');
+    }
+
+    signUp() {
+        this.store.dispatch(new AuthActions.TrySignup());
     }
 
 }

@@ -8,6 +8,7 @@ import * as AuthActions from '@app/core/auth/store/auth.actions';
 import * as MenuActions from '@app/core/menu/store/menu.actions';
 import * as UserActions from '@app/core/user/store/user.actions';
 import {APP_CONFIG, AppConfig} from '@app/app.config';
+import * as ApplicantsActions from '@app/core/applicants/store/applicants.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -60,6 +61,25 @@ export class AuthEffects {
                         type: MenuActions.SET_MENU,
                         payload: false
                     }
+                ];
+            })
+        );
+
+    @Effect()
+    authSignup = this.actions$
+        .pipe(
+            ofType(AuthActions.TRY_SIGNUP),
+            mergeMap(() => {
+                return [
+                    {
+                        type: AuthActions.SIGNUP,
+                    },
+                    {
+                        type: ApplicantsActions.UNSET_APPLICANTS,
+                    },
+                    {
+                        type: ApplicantsActions.TRY_FETCH_APPLICANTS,
+                    },
                 ];
             })
         );

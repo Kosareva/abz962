@@ -1,4 +1,6 @@
-<section class="app-section app-section-internal">
+<section class="app-section app-section-internal"
+         *ngIf="(applicantsState$ | async).applicants.length; else loader"
+>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-10">
@@ -25,3 +27,4 @@
         </div>
     </div>
 </section>
+<ng-template #loader>The users coming...</ng-template>
