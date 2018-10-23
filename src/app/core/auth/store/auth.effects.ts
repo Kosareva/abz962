@@ -66,9 +66,9 @@ export class AuthEffects {
 
     constructor(
         private actions$: Actions,
-        private http: HttpClient,
+        @Inject(APP_CONFIG) private appConfig: AppConfig,
         private errorHandler: AppErrorHandler,
-        @Inject(APP_CONFIG) private appConfig: AppConfig
+        private http: HttpClient,
     ) {
 
     }

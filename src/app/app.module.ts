@@ -13,6 +13,9 @@ import {AuthEffects} from '@app/core/auth/store/auth.effects';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import {RequestInterceptor} from '@app/core/error-handler/http-interceptor';
+import {environment} from '@app/env/environment';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {ApplicantsEffects} from '@app/core/applicants/store/applicants.effects';
 
 @NgModule({
     declarations: [
@@ -22,11 +25,12 @@ import {RequestInterceptor} from '@app/core/error-handler/http-interceptor';
         AppRoutingModule,
         BrowserModule,
         BrowserAnimationsModule,
-        EffectsModule.forRoot([AuthEffects]),
+        EffectsModule.forRoot([AuthEffects, ApplicantsEffects]),
         HomeModule,
         HttpClientModule,
         SharedModule,
         StoreModule.forRoot(reducers),
+        !environment.production ? StoreDevtoolsModule.instrument() : [],
         ToastrModule.forRoot(),
     ],
     providers: [

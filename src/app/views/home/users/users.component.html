@@ -6,17 +6,21 @@
                 <h5 class="text-center">Attention! Sorting users by registration date</h5>
             </div>
             <div class="w-100 mb-5"></div>
-            <app-users-item
-                    class="col-12 col-md-4 mb-5"
-                    *ngFor="let i of [1,2,3,4,5,6]"
-                    [src]="'./assets/imgs/logo/logo.svg'"
-                    [title]="'Noah De Noah Noahovich Noahovna'"
-                    [text]="['Leading specialist of the Control Department',
-                            'noah.controldepartment@gmail.com',
-                            '+38 (050) 678 03 24']">
-            </app-users-item>
+            <ng-container *ngIf="(applicantsState$ | async).applicants as applicants">
+                <app-users-item
+                        class="col-12 col-md-4 mb-5"
+                        *ngFor="let applicant of applicants"
+                        [src]="applicant.photo"
+                        [title]="applicant.name"
+                        [text]="[applicant.position, applicant.email, applicant.phone]">
+                </app-users-item>
+            </ng-container>
             <div class="col-12 text-center">
-            <button class="btn btn-sm btn-outline-primary btn-with-min-width">Show more</button>
+                <button class="btn btn-sm btn-outline-primary btn-with-min-width"
+                        *ngIf="(applicantsState$ | async).links.next_url"
+                        (click)="showMoreUsers()"
+                >Show more
+                </button>
             </div>
         </div>
     </div>
