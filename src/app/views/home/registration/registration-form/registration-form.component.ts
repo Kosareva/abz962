@@ -4,9 +4,12 @@ import {Observable} from 'rxjs';
 import * as fromApp from '@app/store/app.reducers';
 import * as fromPositions from '@app/views/home/registration/store/positions.reducers';
 import * as PositionsActions from '@app/views/home/registration/store/positions.actions';
-import * as AuthActions from '@app/core/auth/store/auth.actions';
 import {FormBuilder, Validators} from '@angular/forms';
 import {accept, EMAIL_PATTERN, isInteger, isString, maxSize, minResolution, PHONE_PATTERN, single} from '@app/shared/validators/validators';
+import {ToastrService} from 'ngx-toastr';
+import {required} from '@app/shared/directives/file-input/file-input.directive';
+import {RegistrationForm, RegistrationFormModel} from '@app/views/home/registration/registration-form/registration-form.model';
+import * as AuthActions from '@app/core/auth/store/auth.actions';
 
 @Component({
     selector: 'app-registration-form',
@@ -15,6 +18,7 @@ import {accept, EMAIL_PATTERN, isInteger, isString, maxSize, minResolution, PHON
 })
 export class RegistrationFormComponent implements OnInit {
 
+    clear = false;
     positionsState$: Observable<fromPositions.State>;
     form = this.fb.group({
         name: ['', [
@@ -39,6 +43,7 @@ export class RegistrationFormComponent implements OnInit {
             Validators.min(1)
         ]],
         photo: ['', Validators.compose([
+            required(),
             single(),
             maxSize(5),
             accept(['image/jpeg', 'image/jpg']),
@@ -48,6 +53,7 @@ export class RegistrationFormComponent implements OnInit {
     constructor(
         private store: Store<fromApp.AppState>,
         private fb: FormBuilder,
+        private toastr: ToastrService,
     ) {
     }
 
@@ -56,12 +62,32 @@ export class RegistrationFormComponent implements OnInit {
         this.positionsState$ = this.store.select('positions');
     }
 
-    onSubmit() {
-        console.warn(this.form);
+    onFileClear() {
+        this.clearFile();
     }
 
-    signUp() {
-        this.store.dispatch(new AuthActions.TrySignup());
+    onSubmit() {
+        console.warn(this.form);
+        const formData = RegistrationForm.createFormData(<RegistrationFormModel>this.form.value);
+        this.store.dispatch(new AuthActions.TrySignup(formData));
+        // if (!this.form.valid) {
+        //     this.toastr.warning('Registration form is not valid');
+        //     return;
+        // }
+        this.clearForm();
+    }
+
+    private clearForm() {
+        this.form.get('name').setValue('');
+        this.form.get('email').setValue('');
+        this.form.get('phone').setValue('');
+        this.form.get('position_id').setValue('');
+        this.clearFile();
+    }
+
+    private clearFile() {
+        this.form.get('photo').setValue('');
+        this.clear = true;
     }
 
 }

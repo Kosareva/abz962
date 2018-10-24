@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {mergeMap, switchMap} from 'rxjs/operators';
 import {EMPTY, of} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AppError, AppErrorHandler} from '@app/core/error-handler/error-handler';
 import * as AuthActions from '@app/core/auth/store/auth.actions';
 import * as MenuActions from '@app/core/menu/store/menu.actions';
@@ -69,6 +69,19 @@ export class AuthEffects {
     authSignup = this.actions$
         .pipe(
             ofType(AuthActions.TRY_SIGNUP),
+            switchMap((action: AuthActions.TrySignup) => {
+                console.log('TRY');
+                const httpOptions = {
+                    headers: new HttpHeaders({
+                        'token': ''
+                    })
+                };
+                return this.http.post(`${this.appConfig.apiEndpoint}/users`, action.payload, httpOptions);
+            }),
+            switchMap((res) => {
+                console.log(res);
+                return EMPTY;
+            }),
             mergeMap(() => {
                 return [
                     {
@@ -80,6 +93,23 @@ export class AuthEffects {
                     {
                         type: ApplicantsActions.TRY_FETCH_APPLICANTS,
                     },
+                ];
+            })
+        );
+
+    @Effect()
+    refreshToken = this.actions$
+        .pipe(
+            ofType(AuthActions.GET_TOKEN),
+            switchMap((action: AuthActions.GetToken) => {
+                return this.http.get(`${this.appConfig.apiEndpoint}/token`);
+            }),
+            mergeMap((token) => {
+                return [
+                    {
+                        type: AuthActions.SET_TOKEN,
+                        payload: token
+                    }
                 ];
             })
         );

@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
 
 @Component({
     selector: 'app-file-input',
@@ -9,14 +9,25 @@ export class FileInputComponent implements OnInit {
 
     @ViewChild('fileInput') fileInput: ElementRef;
     @Input() placeholder;
+    @Output() clearChange = new EventEmitter();
     fileName: string;
 
-    constructor() {
+    @Input()
+    set clear(val) {
+        if (val) {
+            this.deleteFile();
+        }
+    }
+
+    constructor(
+        private renderer: Renderer2,
+    ) {
     }
 
     deleteFile() {
-        this.fileInput.nativeElement.value = null;
+        this.renderer.setProperty(this.fileInput.nativeElement, 'value', null);
         this.fileName = this.placeholder;
+        this.clearChange.emit();
     }
 
     ngOnInit() {

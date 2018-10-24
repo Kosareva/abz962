@@ -2,10 +2,12 @@ import * as AuthActions from '@app/core/auth/store/auth.actions';
 
 export interface State {
     isAuthorized: boolean;
+    token: string;
 }
 
 const initialState: State = {
-    isAuthorized: false
+    isAuthorized: false,
+    token: '',
 };
 
 export function authReducer(state = initialState, action: AuthActions.AuthActions) {
@@ -24,6 +26,11 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
             return {
                 ...state,
                 isAuthorized: false
+            };
+        case (AuthActions.SET_TOKEN):
+            return {
+                ...state,
+                token: action.payload
             };
         default:
             return state;

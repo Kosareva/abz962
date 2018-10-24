@@ -34,13 +34,13 @@
     </div>
     <div class="col-12 col-md-6 mb-4">
         <div class="form-group">
-            <app-file-input formControlName="photo" [placeholder]="'Upload your photo'"></app-file-input>
+            <app-file-input formControlName="photo" [placeholder]="'Upload your photo'"
+                            (clearChange)="onFileClear()" [clear]="clear"></app-file-input>
         </div>
     </div>
     <div class="col-12 text-center mt-4">
-        <button type="submit" class="btn btn-sm btn-with-min-width" [disabled]="!form.valid" (click)="signUp()">Sign
-            Up
-        </button>
+        <button type="submit" class="btn btn-sm btn-with-min-width">Sign Up</button>
+        <!--<button type="submit" class="btn btn-sm btn-with-min-width" [disabled]="!form.valid">Sign Up</button>-->
     </div>
 </form>
 <ng-template #loader>

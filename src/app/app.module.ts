@@ -12,10 +12,11 @@ import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from '@app/core/auth/store/auth.effects';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
-import {RequestInterceptor} from '@app/core/error-handler/http-interceptor';
+import {RequestInterceptor} from '@app/core/http-interceptors/http-interceptor';
 import {environment} from '@app/env/environment';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {ApplicantsEffects} from '@app/core/applicants/store/applicants.effects';
+import {RefreshTokenInterceptor} from '@app/core/http-interceptors/refresh-token.interceptor';
 
 @NgModule({
     declarations: [
@@ -37,6 +38,11 @@ import {ApplicantsEffects} from '@app/core/applicants/store/applicants.effects';
         {
             provide: HTTP_INTERCEPTORS,
             useClass: RequestInterceptor,
+            multi: true,
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: RefreshTokenInterceptor,
             multi: true,
         },
     ],
