@@ -5,8 +5,15 @@ app-users-item {
     float: left;
     display: inline;
   }
-  .text{
+  .text {
     margin-top: 22px;
-    overflow: hidden;
+    max-width: 100%;
+  }
+  .app-users-item {
+    &__ {
+      &title {
+        word-break: break-word;
+      }
+    }
   }
 }

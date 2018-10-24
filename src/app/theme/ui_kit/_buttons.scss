@@ -1,4 +1,4 @@
-@import "mixins/buttons";
+@import "../mixins/buttons";
 //
 // Alternate buttons
 //
@@ -16,6 +16,10 @@
 }
 
 .btn {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
   font-size: $font-size-base * 1.25;
   &-sm {
     font-size: $font-size-sm * 1.25;

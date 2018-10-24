@@ -45,6 +45,7 @@ h4 {
 // paragraph
 p {
   font: 400 20px source-sans-pro;
+  word-break: break-word;
   &.p2 {
     font: 400 16px source-sans-pro;
   }
@@ -56,6 +57,8 @@ p {
   }
 }
 
-.on-dark {
-  color: #fff;
+@for $i from 1 through 6 {
+  h#{$i} {
+    word-break: break-word;
+  }
 }

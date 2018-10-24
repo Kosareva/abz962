@@ -100,3 +100,13 @@ export function minResolution(width: number, height: number) {
         });
     };
 }
+
+export function required(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+        if (!control.value.length) {
+            return {required: 'true'};
+        } else {
+            return null;
+        }
+    };
+}

@@ -1,17 +1,6 @@
 import {Directive, forwardRef, OnInit} from '@angular/core';
-import {AbstractControl, ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidatorFn} from '@angular/forms';
-import {accept, maxSize, single} from '@app/shared/validators/validators';
-
-export function required(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        console.log('required');
-        if (!control.value.length) {
-            return {required: 'true'};
-        } else {
-            return null;
-        }
-    };
-}
+import {ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {accept, maxSize, required, single} from '@app/shared/validators/validators';
 
 @Directive({
     selector: 'app-file-input[formControlName]',

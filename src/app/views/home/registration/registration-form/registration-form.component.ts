@@ -5,9 +5,18 @@ import * as fromApp from '@app/store/app.reducers';
 import * as fromPositions from '@app/views/home/registration/store/positions.reducers';
 import * as PositionsActions from '@app/views/home/registration/store/positions.actions';
 import {FormBuilder, Validators} from '@angular/forms';
-import {accept, EMAIL_PATTERN, isInteger, isString, maxSize, minResolution, PHONE_PATTERN, single} from '@app/shared/validators/validators';
+import {
+    EMAIL_PATTERN,
+    PHONE_PATTERN,
+    accept,
+    isInteger,
+    isString,
+    maxSize,
+    minResolution,
+    required,
+    single
+} from '@app/shared/validators/validators';
 import {ToastrService} from 'ngx-toastr';
-import {required} from '@app/shared/directives/file-input/file-input.directive';
 import {RegistrationForm, RegistrationFormModel} from '@app/views/home/registration/registration-form/registration-form.model';
 import * as AuthActions from '@app/core/auth/store/auth.actions';
 
@@ -67,13 +76,13 @@ export class RegistrationFormComponent implements OnInit {
     }
 
     onSubmit() {
-        console.warn(this.form);
         const formData = RegistrationForm.createFormData(<RegistrationFormModel>this.form.value);
-        this.store.dispatch(new AuthActions.TrySignup(formData));
         // if (!this.form.valid) {
-        //     this.toastr.warning('Registration form is not valid');
+        //     this.toastr.warning('Form is not valid');
+        //     this.markAsTouchedAll();
         //     return;
         // }
+        this.store.dispatch(new AuthActions.TrySignup(formData));
         this.clearForm();
     }
 
@@ -88,6 +97,12 @@ export class RegistrationFormComponent implements OnInit {
     private clearFile() {
         this.form.get('photo').setValue('');
         this.clear = true;
+    }
+
+    private markAsTouchedAll() {
+        Object.keys(this.form.controls).forEach(key => {
+            this.form.get(key).markAsTouched();
+        });
     }
 
 }

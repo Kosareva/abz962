@@ -5,6 +5,8 @@
 
 .nav-link {
   color: #000;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   @include hover-focus {
     color: lighten(map_get($theme-colors, primary), 15);

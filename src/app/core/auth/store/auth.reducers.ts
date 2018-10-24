@@ -3,11 +3,13 @@ import * as AuthActions from '@app/core/auth/store/auth.actions';
 export interface State {
     isAuthorized: boolean;
     token: string;
+    tokenPristine: boolean;
 }
 
 const initialState: State = {
     isAuthorized: false,
     token: '',
+    tokenPristine: true
 };
 
 export function authReducer(state = initialState, action: AuthActions.AuthActions) {
@@ -31,7 +33,8 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
             localStorage.setItem('token', action.payload);
             return {
                 ...state,
-                token: action.payload
+                token: action.payload,
+                tokenPristine: false,
             };
         default:
             return state;

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {EMPTY, Observable} from 'rxjs';
+import {EMPTY, Observable, of} from 'rxjs';
 import {catchError, switchMap, take} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 import * as fromApp from '@app/store/app.reducers';
@@ -32,7 +32,16 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
             .pipe(
                 take(1),
                 switchMap((authState: fromAuth.State) => {
-                    const reqCloned = request.clone({headers: request.headers.set('token', authState.token)});
+                    const fromLocalStorage = localStorage.getItem('token');
+                    if (authState.tokenPristine) {
+                        this.store.dispatch(new AuthActions.SetToken(fromLocalStorage));
+                        return this.store.select('auth');
+                    } else {
+                        return of(authState);
+                    }
+                }),
+                switchMap((authState: fromAuth.State) => {
+                    const reqCloned = request.clone({headers: request.headers.set('token', authState.token || '')});
                     return next.handle(reqCloned);
                 }),
                 catchError((err) => {

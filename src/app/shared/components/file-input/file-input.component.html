@@ -2,9 +2,12 @@
     <input type="file" #fileInput (change)="onChange($event)">
     <span>{{fileName}}</span>
     <div class="file-input-btns-container">
-        <button type="button" class="btn btn-outline-primary btn-upload d-none d-md-block" (click)="trigger()">Upload</button>
         <button *ngIf="fileInput.files.length" type="button" class="btn btn-link btn-delete" (click)="deleteFile()">x
         </button>
+        <button type="button" class="btn btn-outline-primary btn-upload d-none d-md-block btn-upload"
+                (click)="trigger()">Upload
+        </button>
+        <button type="button" class="btn btn-outline-primary icon-upload d-md-none btn-upload"
+                (click)="trigger()"></button>
     </div>
-    <button type="button" class="btn btn-outline-primary icon-upload d-md-none" (click)="trigger()"></button>
 </div>

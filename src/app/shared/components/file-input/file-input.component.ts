@@ -8,7 +8,7 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, V
 export class FileInputComponent implements OnInit {
 
     @ViewChild('fileInput') fileInput: ElementRef;
-    @Input() placeholder;
+    @Input() placeholder = 'Choose file';
     @Output() clearChange = new EventEmitter();
     fileName: string;
 

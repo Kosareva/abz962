@@ -8,6 +8,12 @@ app-file-input {
     align-items: center;
     color: $input-placeholder-color;
     cursor: default;
+    padding-right: 100px;
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
   .btn.btn-upload {
     position: relative;
@@ -31,10 +37,19 @@ app-file-input {
     top: -$input-border-width;
     bottom: -$input-border-width;
     padding-left: 50px;
+    max-width: 50%;
+    .btn {
+      max-width: 100%;
+    }
   }
 }
 
 @include media-breakpoint-up(md) {
-  padding-right: $btn-padding-x * 2.5;
-  padding-left: $btn-padding-x * 2.5;
+  //padding-right: $btn-padding-x * 2.5;
+  //padding-left: $btn-padding-x * 2.5;
+  app-file-input {
+    .app-pseudo-file-input {
+      padding-right: 145px;
+    }
+  }
 }

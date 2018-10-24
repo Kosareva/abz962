@@ -1,7 +1,8 @@
 app-footer {
-  @include clearfix;
-  width: 100%;
-  background: map_get($theme-colors, secondary);
+  footer {
+    width: 100%;
+    background: map_get($theme-colors, secondary);
+  }
 }
 
 @include media-breakpoint-down(sm) {
@@ -13,9 +14,9 @@ app-footer {
         margin-top: 10px;
         display: flex;
         flex-direction: column;
-        a{
+        a {
           text-align: center;
-          line-height: 0.7;
+          line-height: 1;
         }
       }
     }

@@ -1,6 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {catchError, map, mergeMap, switchMap, take, tap} from 'rxjs/operators';
+import {mergeMap, switchMap, take} from 'rxjs/operators';
 import {EMPTY, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AppError, AppErrorHandler} from '@app/core/error-handler/error-handler';
@@ -10,6 +10,8 @@ import * as UserActions from '@app/core/user/store/user.actions';
 import {APP_CONFIG, AppConfig} from '@app/app.config';
 import * as ApplicantsActions from '@app/core/applicants/store/applicants.actions';
 import {ToastrService} from 'ngx-toastr';
+import * as fromAuth from '@app/core/auth/store/auth.reducers';
+import {User} from '@app/core/user/user';
 
 @Injectable()
 export class AuthEffects {
@@ -29,7 +31,8 @@ export class AuthEffects {
                     return EMPTY;
                 }
             }),
-            mergeMap((user) => {
+            mergeMap((user: User) => {
+                this.toastr.success(`You\'ve been logged as ${user.name}`);
                 return [
                     {
                         type: AuthActions.SIGNIN,
@@ -51,6 +54,7 @@ export class AuthEffects {
         .pipe(
             ofType(AuthActions.TRY_SIGNOUT),
             mergeMap(() => {
+                this.toastr.success(`You\'ve been logged out`);
                 return [
                     {
                         type: AuthActions.SIGNOUT,
@@ -101,13 +105,8 @@ export class AuthEffects {
     refreshToken = this.actions$
         .pipe(
             ofType(AuthActions.GET_TOKEN),
-            switchMap((action: AuthActions.GetToken) => {
-                const token = localStorage.getItem('token');
-                if (token) {
-                    return of({success: true, token: token});
-                } else {
-                    return this.http.get(`${this.appConfig.apiEndpoint}/token`);
-                }
+            switchMap((state: fromAuth.State) => {
+                return this.http.get(`${this.appConfig.apiEndpoint}/token`);
             }),
             switchMap((res: any) => {
                 console.log('refreshToken: ', res);

@@ -1,5 +1,4 @@
 import {Action} from '@ngrx/store';
-import {RegistrationForm} from '@app/views/home/registration/registration-form/registration-form.model';
 
 export const TRY_SIGNIN = 'TRY_SIGNIN';
 export const TRY_SIGNOUT = 'TRY_SIGNOUT';
