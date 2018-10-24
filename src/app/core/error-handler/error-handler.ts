@@ -32,6 +32,12 @@ export class AppErrorHandler {
                     case 404:
                         msg = error.statusText;
                         break;
+                    case 409:
+                        msg = error.error.message;
+                        break;
+                    case 422:
+                        msg = error.error.message;
+                        break;
                     default:
                         break;
                 }

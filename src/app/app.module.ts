@@ -37,11 +37,6 @@ import {RefreshTokenInterceptor} from '@app/core/http-interceptors/refresh-token
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
-            useClass: RequestInterceptor,
-            multi: true,
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
             useClass: RefreshTokenInterceptor,
             multi: true,
         },

@@ -28,6 +28,7 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
                 isAuthorized: false
             };
         case (AuthActions.SET_TOKEN):
+            localStorage.setItem('token', action.payload);
             return {
                 ...state,
                 token: action.payload

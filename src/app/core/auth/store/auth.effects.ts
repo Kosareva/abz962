@@ -1,6 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {mergeMap, switchMap} from 'rxjs/operators';
+import {catchError, map, mergeMap, switchMap, take, tap} from 'rxjs/operators';
 import {EMPTY, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AppError, AppErrorHandler} from '@app/core/error-handler/error-handler';
@@ -9,6 +9,7 @@ import * as MenuActions from '@app/core/menu/store/menu.actions';
 import * as UserActions from '@app/core/user/store/user.actions';
 import {APP_CONFIG, AppConfig} from '@app/app.config';
 import * as ApplicantsActions from '@app/core/applicants/store/applicants.actions';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable()
 export class AuthEffects {
@@ -70,7 +71,6 @@ export class AuthEffects {
         .pipe(
             ofType(AuthActions.TRY_SIGNUP),
             switchMap((action: AuthActions.TrySignup) => {
-                console.log('TRY');
                 const httpOptions = {
                     headers: new HttpHeaders({
                         'token': ''
@@ -78,11 +78,11 @@ export class AuthEffects {
                 };
                 return this.http.post(`${this.appConfig.apiEndpoint}/users`, action.payload, httpOptions);
             }),
-            switchMap((res) => {
-                console.log(res);
-                return EMPTY;
-            }),
-            mergeMap(() => {
+            take(1),
+            mergeMap((res: any) => {
+                if (res.success) {
+                    this.toastr.success(res.message);
+                }
                 return [
                     {
                         type: AuthActions.SIGNUP,
@@ -102,7 +102,21 @@ export class AuthEffects {
         .pipe(
             ofType(AuthActions.GET_TOKEN),
             switchMap((action: AuthActions.GetToken) => {
-                return this.http.get(`${this.appConfig.apiEndpoint}/token`);
+                const token = localStorage.getItem('token');
+                if (token) {
+                    return of({success: true, token: token});
+                } else {
+                    return this.http.get(`${this.appConfig.apiEndpoint}/token`);
+                }
+            }),
+            switchMap((res: any) => {
+                console.log('refreshToken: ', res);
+                if (res.success && res.token) {
+                    return of(res.token);
+                } else {
+                    this.errorHandler.handleError(new AppError('Oops, can\'t fetch token'));
+                    return EMPTY;
+                }
             }),
             mergeMap((token) => {
                 return [
@@ -119,6 +133,7 @@ export class AuthEffects {
         @Inject(APP_CONFIG) private appConfig: AppConfig,
         private errorHandler: AppErrorHandler,
         private http: HttpClient,
+        private toastr: ToastrService,
     ) {
 
     }
