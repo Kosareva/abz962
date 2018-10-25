@@ -35,30 +35,34 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
                     const fromLocalStorage = localStorage.getItem('token');
                     if (authState.tokenPristine) {
                         this.store.dispatch(new AuthActions.SetToken(fromLocalStorage));
-                        return this.store.select('auth').pipe(take(1));
+                        console.log('authState.tokenPristine: ', authState.tokenPristine);
+                        return this.store.select('auth');
                     } else {
+                        console.log('authState.tokenPristine: ', authState.tokenPristine);
                         return of(authState);
                     }
                 }),
                 switchMap((authState: fromAuth.State) => {
+                    console.log('refr 1');
                     const reqCloned = request.clone({headers: request.headers.set('token', authState.token || '')});
-                    return next.handle(reqCloned)
-                        .pipe(
-                            catchError((err) => {
-                                if (err.status === 401) {
-                                    this.store.dispatch(new AuthActions.GetToken());
-                                    return this.store.select('auth').pipe(take(1));
-                                } else {
-                                    this.errorHandler.handleError(err);
-                                    return EMPTY;
-                                }
-                            }),
-                        );
+                    return next.handle(reqCloned);
+                }),
+                catchError((err) => {
+                    if (err.status === 401) {
+                        console.log('401');
+                        this.store.dispatch(new AuthActions.GetToken());
+                        return this.store.select('auth');
+                    } else {
+                        console.log('other error');
+                        this.errorHandler.handleError(err);
+                        return EMPTY;
+                    }
                 }),
                 switchMap((authState: fromAuth.State) => {
                     let returnVal: Observable<any> = EMPTY;
                     if (authState.token) {
                         if (authState.token.length) {
+                            console.log('authState.token.length: ', authState.token.length);
                             const reqCloned = request.clone({headers: request.headers.set('token', authState.token)});
                             returnVal = next.handle(reqCloned);
                         }

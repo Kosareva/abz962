@@ -59,7 +59,6 @@
                     [placeholder]="'Upload your photo'"
                     (changeEvent)="onFileClear()"
                     [change]="changeFile"
-                    #photoInput
             ></app-file-input>
             <div class="invalid-feedback" *ngIf="form.get('photo').errors && fileTouched">
                 <p>

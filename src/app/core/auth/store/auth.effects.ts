@@ -80,15 +80,18 @@ export class AuthEffects {
                         'token': ''
                     })
                 };
+                console.log('TRY!');
                 return this.http.post(`${this.appConfig.apiEndpoint}/users`, action.payload, httpOptions)
                     .pipe(
                         catchError((e) => {
+                            console.log('authSignup err', e);
                             return of(1);
                         })
                     );
             }),
             // take(1),
             mergeMap((res: any) => {
+                console.log('authSignup aftre try', res);
                 if (res.success) {
                     this.toastr.success(res.message);
                 }

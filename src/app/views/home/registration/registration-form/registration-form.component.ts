@@ -79,19 +79,19 @@ export class RegistrationFormComponent implements OnInit {
 
     onSubmit() {
         const formData = RegistrationForm.createFormData(<RegistrationFormModel>this.form.value);
-        if (!this.form.valid) {
-            this.toastr.error('Form is not valid');
-            this.markAsTouchedAll();
-            return;
-        }
+        // if (!this.form.valid) {
+        //     this.toastr.error('Form is not valid');
+        //     this.markAsTouchedAll();
+        //     return;
+        // }
+        this.store.dispatch(new AuthActions.TrySignup(formData));
         this.clearForm();
         this.markAsUntouchedAll();
-        this.store.dispatch(new AuthActions.TrySignup(formData));
     }
 
     private clearForm() {
         Object.keys(this.form.controls).forEach(key => {
-            this.form.get(key).reset();
+            this.form.get(key).setValue('');
         });
         this.clearFile();
     }
@@ -122,6 +122,7 @@ export class RegistrationFormComponent implements OnInit {
 
     private markAsUntouchedFile() {
         this.changeFile = 'markAsUntouched';
+        this.fileTouched = false;
     }
 
 }
