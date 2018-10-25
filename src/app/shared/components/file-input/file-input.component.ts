@@ -3,31 +3,48 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, V
 @Component({
     selector: 'app-file-input',
     templateUrl: './file-input.component.html',
-    styleUrls: ['./file-input.component.scss']
+    styleUrls: ['./file-input.component.scss'],
 })
 export class FileInputComponent implements OnInit {
 
     @ViewChild('fileInput') fileInput: ElementRef;
     @Input() placeholder = 'Choose file';
-    @Output() clearChange = new EventEmitter();
+    @Output() changeEvent = new EventEmitter();
     fileName: string;
 
     @Input()
-    set clear(val) {
-        if (val) {
-            this.deleteFile();
+    set change(val) {
+        switch (val) {
+            case 'clear':
+                setTimeout(() => {
+                    this.deleteFile();
+                }, 0);
+                break;
+            case 'markAsUntouched':
+                setTimeout(() => {
+                    this.markAsUntouched();
+                }, 0);
+                break;
+            case 'markAsTouched':
+                setTimeout(() => {
+                    this.markAsTouched();
+                }, 0);
+                break;
+            default:
+                break;
         }
     }
 
     constructor(
         private renderer: Renderer2,
+        private elRef: ElementRef,
     ) {
     }
 
     deleteFile() {
         this.renderer.setProperty(this.fileInput.nativeElement, 'value', null);
         this.fileName = this.placeholder;
-        this.clearChange.emit();
+        this.changeEvent.emit();
     }
 
     ngOnInit() {
@@ -44,6 +61,16 @@ export class FileInputComponent implements OnInit {
 
     trigger() {
         this.fileInput.nativeElement.click();
+    }
+
+    private markAsTouched() {
+        this.renderer.addClass(this.elRef.nativeElement, 'ng-touched');
+        this.renderer.removeClass(this.elRef.nativeElement, 'ng-untouched');
+    }
+
+    private markAsUntouched() {
+        this.renderer.addClass(this.elRef.nativeElement, 'ng-untouched');
+        this.renderer.removeClass(this.elRef.nativeElement, 'ng-touched');
     }
 
 }

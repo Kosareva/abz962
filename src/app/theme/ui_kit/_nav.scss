@@ -7,6 +7,7 @@
   color: #000;
   text-overflow: ellipsis;
   overflow: hidden;
+  word-break: break-word;
 
   @include hover-focus {
     color: lighten(map_get($theme-colors, primary), 15);

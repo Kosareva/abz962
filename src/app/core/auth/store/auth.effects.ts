@@ -1,6 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {mergeMap, switchMap, take} from 'rxjs/operators';
+import {catchError, mergeMap, switchMap, take} from 'rxjs/operators';
 import {EMPTY, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AppError, AppErrorHandler} from '@app/core/error-handler/error-handler';
@@ -80,9 +80,14 @@ export class AuthEffects {
                         'token': ''
                     })
                 };
-                return this.http.post(`${this.appConfig.apiEndpoint}/users`, action.payload, httpOptions);
+                return this.http.post(`${this.appConfig.apiEndpoint}/users`, action.payload, httpOptions)
+                    .pipe(
+                        catchError((e) => {
+                            return of(1);
+                        })
+                    );
             }),
-            take(1),
+            // take(1),
             mergeMap((res: any) => {
                 if (res.success) {
                     this.toastr.success(res.message);
@@ -109,7 +114,6 @@ export class AuthEffects {
                 return this.http.get(`${this.appConfig.apiEndpoint}/token`);
             }),
             switchMap((res: any) => {
-                console.log('refreshToken: ', res);
                 if (res.success && res.token) {
                     return of(res.token);
                 } else {

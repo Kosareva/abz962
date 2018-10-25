@@ -4,7 +4,7 @@
             <div class="col-auto">
                 <app-logo></app-logo>
             </div>
-            <div class="col-12 col-md-auto">
+            <div class="col-12 col-md-auto pl-0 pr-0 mw-100">
                 <app-main-menu></app-main-menu>
             </div>
         </div>
@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-4">
-                <p class="d-flex align-items-center justify-content-center justify-content-md-start"><span
+                <p class="d-flex align-items-center justify-content-center justify-content-md-start text-center text-md-left"><span
                         class="icon-mail pr-2 d-none d-md-block"></span><span>work.of.future@gmail.com</span>
                 </p>
                 <p class="d-flex align-items-center justify-content-center justify-content-md-start"><span
@@ -29,16 +29,25 @@
             </div>
             <div class="w-100"></div>
         </div>
-        <div class="row align-items-center justify-content-center justify-content-md-between">
-            <div class="col-12 col-md-auto order-1 order-md-0 text-center text-md-left">
-                <p class="p4 mt-4">© abz.agency specially for the test task</p>
-            </div>
-            <div class="col-12 col-md-auto pr-md-0 d-flex order-0 order-md-1 justify-content-center justify-content-md-end flex-wrap">
+        <div class="row align-items-center justify-content-center justify-content-md-between mt-4 align-items-stretch">
+            <div class="col-12 col-md order-md-1 d-flex justify-content-center justify-content-md-end flex-wrap pr-0 mb-3 mb-md-0">
                 <ng-container
                         *ngFor="let icon of ['icon-facebook', 'icon-instagram', 'icon-linkedin' ,'icon-pinterest' ,'icon-twitter']">
                     <button class="btn btn-link d-flex align-items-center"><span [class]="icon"></span></button>
                 </ng-container>
             </div>
+            <div class="col-12 col-md-4 order-md-0 align-self-end lh-1 text-center text-md-left">© abz.agency specially
+                for the test task
+            </div>
+            <!--<div class="col-12 col-md-auto order-1 text-center text-md-left">-->
+            <!--<p class="p4 m-0">© abz.agency specially for the test task</p>-->
+            <!--</div>-->
+            <!--<div class="col-12 col-md-auto pr-md-0 d-flex order-0 justify-content-center justify-content-md-end flex-wrap">-->
+            <!--<ng-container-->
+            <!--*ngFor="let icon of ['icon-facebook', 'icon-instagram', 'icon-linkedin' ,'icon-pinterest' ,'icon-twitter']">-->
+            <!--<button class="btn btn-link d-flex align-items-center"><span [class]="icon"></span></button>-->
+            <!--</ng-container>-->
+            <!--</div>-->
         </div>
     </div>
 </footer>

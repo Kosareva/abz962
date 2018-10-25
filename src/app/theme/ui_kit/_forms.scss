@@ -5,16 +5,16 @@
   color: $input-border-color;
   border-radius: $input-border-radius;
   position: absolute;
-  transform: translate(calc(#{$input-padding-x} - 4px), -50%);
+  transform: translate(calc(#{$input-padding-x} + #{$input-border-width}), -50%);
   padding-left: 5px;
   padding-right: 5px;
   &-sm {
     @include border-radius($input-border-radius-sm);
-    transform: translate(calc(#{$input-padding-x-sm} - 5px), -50%);
+    transform: translate(calc(#{$input-padding-x-sm} + #{$input-border-width}), -50%);
   }
   &-lg {
     @include border-radius($input-border-radius-lg);
-    transform: translate(calc(#{$input-padding-x-lg} - 5px), -50%);
+    transform: translate(calc(#{$input-padding-x-lg} + #{$input-border-width}), -50%);
   }
 }
 
@@ -26,7 +26,31 @@
     }
   }
   &:focus {
-    @include app-input-focus;
+    @include app-input-focus($input-border-color, 1px);
+  }
+  &.ng-invalid.ng-touched {
+    border: $input-border-width solid map_get($theme-colors, danger);
+    &:focus {
+      @include app-input-focus(map_get($theme-colors, danger), 1px);
+    }
+  }
+}
+
+.invalid-feedback {
+  display: block;
+  padding-left: calc(#{$input-padding-x} + #{$input-border-width});
+  p {
+    font-size: $font-size-base;
+    color: map_get($theme-colors, danger);
+  }
+}
+
+.form-control {
+  &-lg ~ .invalid-feedback {
+    padding-left: calc(#{$input-padding-x-lg} + #{$input-border-width});
+  }
+  &-sm ~ .invalid-feedback {
+    padding-left: calc(#{$input-padding-x-sm} + #{$input-border-width});
   }
 }
 
@@ -101,9 +125,5 @@ select:not([multiple]) {
       height: calc(#{$app-select-height-lg} - 12px);
     }
   }
-
-}
-
-.app-form-control-file {
 
 }

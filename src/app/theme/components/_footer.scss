@@ -2,6 +2,7 @@ app-footer {
   footer {
     width: 100%;
     background: map_get($theme-colors, secondary);
+    overflow: hidden;
   }
 }
 

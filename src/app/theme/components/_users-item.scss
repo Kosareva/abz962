@@ -1,18 +1,41 @@
 app-users-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   .user-avatar {
     height: 70px;
     width: 70px;
     float: left;
     display: inline;
+    object-fit: cover;
   }
   .text {
-    margin-top: 22px;
     max-width: 100%;
   }
+}
+
+.app-users-item {
+  &__ {
+    &title {
+      word-break: break-word;
+    }
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  app-users-item {
+    flex-direction: row;
+    text-align: left;
+    .text {
+      margin-top: 22px;
+    }
+  }
+
   .app-users-item {
     &__ {
       &title {
-        word-break: break-word;
+        margin-top: 35px;
       }
     }
   }

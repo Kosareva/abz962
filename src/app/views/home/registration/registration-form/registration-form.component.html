@@ -8,12 +8,23 @@
         <div class="form-group">
             <label class="label-float">Name</label>
             <input type="text" class="form-control form-control-lg" formControlName="name" placeholder="Your name">
+            <div class="invalid-feedback" *ngIf="!form.get('name').valid && form.get('name').touched">
+                <p *ngIf="form.get('name').hasError('required')">User name required</p>
+                <p *ngIf="form.get('name').hasError('minlength') || form.get('name').hasError('maxlength')">User name
+                    must be 2-60 characters</p>
+            </div>
         </div>
     </div>
     <div class="col-12 col-md-4 mb-4">
         <div class="form-group">
             <label class="label-float">Email</label>
             <input type="email" class="form-control form-control-lg" formControlName="email" placeholder="Your email">
+            <div class="invalid-feedback" *ngIf="!form.get('email').valid && form.get('email').touched">
+                <p *ngIf="form.get('email').hasError('required')">Email required</p>
+                <p *ngIf="form.get('email').hasError('minlength') || form.get('email').hasError('maxlength')">Email
+                    2-100 characters</p>
+                <p *ngIf="form.get('email').hasError('pattern')">Wrong email format</p>
+            </div>
         </div>
     </div>
     <div class="col-12 col-md-4 mb-4">
@@ -21,32 +32,43 @@
             <label class="label-float">Phone</label>
             <input type="tel" class="form-control form-control-lg" formControlName="phone"
                    placeholder="+38(___) ___ __ __">
+            <div class="invalid-feedback" *ngIf="!form.get('phone').valid && form.get('phone').touched">
+                <p *ngIf="form.get('phone').hasError('required')">Phone required</p>
+                <p *ngIf="form.get('phone').hasError('pattern')">Wrong phone format</p>
+            </div>
         </div>
     </div>
     <div class="col-12 col-md-6 mb-4">
         <div class="form-group">
             <select formControlName="position_id" class="form-control form-control-lg">
                 <option disabled value="">--Select position--</option>
-                <option style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
-                        *ngFor="let position of (positionsState$ | async).positions" [value]="position.id">
-                    <!--{{(position.name | slice:0:10)+'...'}}-->
-                    <ng-container>
-
-                    </ng-container>
+                <option *ngFor="let position of (positionsState$ | async).positions" [value]="position.id">
                     {{position.name}}
                 </option>
             </select>
+            <div class="invalid-feedback" *ngIf="!form.get('position_id').valid && form.get('position_id').touched">
+                <p *ngIf="form.get('position_id').hasError('required')">Choose position</p>
+            </div>
         </div>
     </div>
     <div class="col-12 col-md-6 mb-4">
         <div class="form-group">
-            <app-file-input formControlName="photo" [placeholder]="'Upload your photo'"
-                            (clearChange)="onFileClear()" [clear]="clear"></app-file-input>
+            <app-file-input
+                    class="form-control form-control-lg"
+                    formControlName="photo"
+                    [placeholder]="'Upload your photo'"
+                    (changeEvent)="onFileClear()"
+                    [change]="changeFile"
+                    #photoInput
+            ></app-file-input>
+            <div class="invalid-feedback" *ngIf="form.get('photo').errors && fileTouched">
+                <p>
+                    Photo required, must be less than 5MB, min resolution 70x70, of format image/jpeg, image/jpg</p>
+            </div>
         </div>
     </div>
     <div class="col-12 text-center mt-4">
-        <button type="submit" class="btn btn-sm btn-with-min-width">Sign Up</button>
-        <!--<button type="submit" class="btn btn-sm btn-with-min-width" [disabled]="!form.valid">Sign Up</button>-->
+        <button type="submit" class="btn btn-sm btn-with-min-width" [disabled]="!form.valid">Sign Up</button>
     </div>
 </form>
 <ng-template #loader>

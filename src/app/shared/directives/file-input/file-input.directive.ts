@@ -1,4 +1,4 @@
-import {Directive, forwardRef, OnInit} from '@angular/core';
+import {Directive, ElementRef, forwardRef, OnInit, Renderer2} from '@angular/core';
 import {ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {accept, maxSize, required, single} from '@app/shared/validators/validators';
 
@@ -42,7 +42,10 @@ export class FileInputDirective implements ControlValueAccessor, OnInit {
     onTouched = () => {
     };
 
-    constructor() {
+    constructor(
+        private elRef: ElementRef,
+        private renderer: Renderer2,
+    ) {
     }
 
     ngOnInit() {
@@ -53,6 +56,8 @@ export class FileInputDirective implements ControlValueAccessor, OnInit {
 
     registerOnChange(fn: (filesExternal: FileList) => any): void {
         this.onChange = (files: FileList) => {
+            this.renderer.addClass(this.elRef.nativeElement, 'ng-touched');
+            this.renderer.removeClass(this.elRef.nativeElement, 'ng-untouched');
             if (files.length) {
                 fn(files);
             } else {

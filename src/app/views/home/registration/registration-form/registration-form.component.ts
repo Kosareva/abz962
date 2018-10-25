@@ -16,9 +16,9 @@ import {
     required,
     single
 } from '@app/shared/validators/validators';
-import {ToastrService} from 'ngx-toastr';
 import {RegistrationForm, RegistrationFormModel} from '@app/views/home/registration/registration-form/registration-form.model';
 import * as AuthActions from '@app/core/auth/store/auth.actions';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'app-registration-form',
@@ -27,7 +27,8 @@ import * as AuthActions from '@app/core/auth/store/auth.actions';
 })
 export class RegistrationFormComponent implements OnInit {
 
-    clear = false;
+    changeFile: string;
+    fileTouched = false;
     positionsState$: Observable<fromPositions.State>;
     form = this.fb.group({
         name: ['', [
@@ -73,36 +74,54 @@ export class RegistrationFormComponent implements OnInit {
 
     onFileClear() {
         this.clearFile();
+        this.markAsTouchedFile();
     }
 
     onSubmit() {
         const formData = RegistrationForm.createFormData(<RegistrationFormModel>this.form.value);
-        // if (!this.form.valid) {
-        //     this.toastr.warning('Form is not valid');
-        //     this.markAsTouchedAll();
-        //     return;
-        // }
-        this.store.dispatch(new AuthActions.TrySignup(formData));
+        if (!this.form.valid) {
+            this.toastr.error('Form is not valid');
+            this.markAsTouchedAll();
+            return;
+        }
         this.clearForm();
+        this.markAsUntouchedAll();
+        this.store.dispatch(new AuthActions.TrySignup(formData));
     }
 
     private clearForm() {
-        this.form.get('name').setValue('');
-        this.form.get('email').setValue('');
-        this.form.get('phone').setValue('');
-        this.form.get('position_id').setValue('');
+        Object.keys(this.form.controls).forEach(key => {
+            this.form.get(key).reset();
+        });
         this.clearFile();
     }
 
     private clearFile() {
         this.form.get('photo').setValue('');
-        this.clear = true;
+        this.changeFile = 'clear';
     }
 
     private markAsTouchedAll() {
         Object.keys(this.form.controls).forEach(key => {
             this.form.get(key).markAsTouched();
         });
+        this.markAsTouchedFile();
+    }
+
+    private markAsTouchedFile() {
+        this.changeFile = 'markAsTouched';
+        this.fileTouched = true;
+    }
+
+    private markAsUntouchedAll() {
+        Object.keys(this.form.controls).forEach(key => {
+            this.form.get(key).markAsUntouched();
+        });
+        this.markAsUntouchedFile();
+    }
+
+    private markAsUntouchedFile() {
+        this.changeFile = 'markAsUntouched';
     }
 
 }

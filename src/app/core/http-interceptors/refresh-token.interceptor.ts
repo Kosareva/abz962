@@ -35,23 +35,25 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
                     const fromLocalStorage = localStorage.getItem('token');
                     if (authState.tokenPristine) {
                         this.store.dispatch(new AuthActions.SetToken(fromLocalStorage));
-                        return this.store.select('auth');
+                        return this.store.select('auth').pipe(take(1));
                     } else {
                         return of(authState);
                     }
                 }),
                 switchMap((authState: fromAuth.State) => {
                     const reqCloned = request.clone({headers: request.headers.set('token', authState.token || '')});
-                    return next.handle(reqCloned);
-                }),
-                catchError((err) => {
-                    if (err.status === 401) {
-                        this.store.dispatch(new AuthActions.GetToken());
-                        return this.store.select('auth');
-                    } else {
-                        this.errorHandler.handleError(err);
-                        return EMPTY;
-                    }
+                    return next.handle(reqCloned)
+                        .pipe(
+                            catchError((err) => {
+                                if (err.status === 401) {
+                                    this.store.dispatch(new AuthActions.GetToken());
+                                    return this.store.select('auth').pipe(take(1));
+                                } else {
+                                    this.errorHandler.handleError(err);
+                                    return EMPTY;
+                                }
+                            }),
+                        );
                 }),
                 switchMap((authState: fromAuth.State) => {
                     let returnVal: Observable<any> = EMPTY;
@@ -62,10 +64,6 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
                         }
                     }
                     return returnVal;
-                }),
-                catchError((error) => {
-                    this.errorHandler.handleError(error);
-                    return EMPTY;
                 })
             );
     }
