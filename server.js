@@ -1,8 +1,20 @@
 //Install express server
 const express = require('express');
 const path = require('path');
+var compression = require('compression');
 
 const app = express();
+app.use(compression({filter: shouldCompress}));
+
+function shouldCompress (req, res) {
+    if (req.headers['x-no-compression']) {
+        // don't compress responses with this request header
+        return false
+    }
+
+    // fallback to standard filter function
+    return compression.filter(req, res)
+}
 
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/abz'));
