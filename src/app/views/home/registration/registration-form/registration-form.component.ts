@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
+import {from, fromEvent, interval, Observable, of} from 'rxjs';
 import * as fromApp from '@app/store/app.reducers';
 import * as fromPositions from '@app/views/home/registration/store/positions.reducers';
 import * as PositionsActions from '@app/views/home/registration/store/positions.actions';
@@ -19,6 +19,7 @@ import {
 import {RegistrationForm, RegistrationFormModel} from '@app/views/home/registration/registration-form/registration-form.model';
 import * as AuthActions from '@app/core/auth/store/auth.actions';
 import {ToastrService} from 'ngx-toastr';
+import {concatMap, flatMap, map, switchMap, take} from 'rxjs/operators';
 
 @Component({
     selector: 'app-registration-form',
@@ -79,11 +80,11 @@ export class RegistrationFormComponent implements OnInit {
 
     onSubmit() {
         const formData = RegistrationForm.createFormData(<RegistrationFormModel>this.form.value);
-        // if (!this.form.valid) {
-        //     this.toastr.error('Form is not valid');
-        //     this.markAsTouchedAll();
-        //     return;
-        // }
+        if (!this.form.valid) {
+            this.toastr.error('Form is not valid');
+            this.markAsTouchedAll();
+            return;
+        }
         this.store.dispatch(new AuthActions.TrySignup(formData));
         this.clearForm();
         this.markAsUntouchedAll();

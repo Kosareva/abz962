@@ -1,6 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {catchError, mergeMap, switchMap, take} from 'rxjs/operators';
+import {catchError, mergeMap, skip, skipLast, switchMap, take, takeLast, tap} from 'rxjs/operators';
 import {EMPTY, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AppError, AppErrorHandler} from '@app/core/error-handler/error-handler';
@@ -80,18 +80,12 @@ export class AuthEffects {
                         'token': ''
                     })
                 };
-                console.log('TRY!');
                 return this.http.post(`${this.appConfig.apiEndpoint}/users`, action.payload, httpOptions)
                     .pipe(
-                        catchError((e) => {
-                            console.log('authSignup err', e);
-                            return of(1);
-                        })
+                        take(1),
                     );
             }),
-            // take(1),
             mergeMap((res: any) => {
-                console.log('authSignup aftre try', res);
                 if (res.success) {
                     this.toastr.success(res.message);
                 }
