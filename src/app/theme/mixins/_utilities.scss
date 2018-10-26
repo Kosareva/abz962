@@ -5,16 +5,18 @@
 }
 
 @mixin breakpoints-and-resolution-bg($imgName, $imgExtention, $ratio) {
-  @include media-breakpoint-down(lg) {
-    background-image: url("#{$imgs-path}/#{$imgName}-#{map_get($grid-breakpoints-numbers, xl)}w@#{$ratio}x.#{$imgExtention}");
-  }
-  @include media-breakpoint-down(md) {
-    background-image: url("#{$imgs-path}/#{$imgName}-#{map_get($grid-breakpoints-numbers, lg)}w@#{$ratio}x.#{$imgExtention}");
-  }
-  @include media-breakpoint-down(sm) {
-    background-image: url("#{$imgs-path}/#{$imgName}-#{map_get($grid-breakpoints-numbers, md)}w@#{$ratio}x.#{$imgExtention}");
-  }
-  @include media-breakpoint-down(xs) {
-    background-image: url("#{$imgs-path}/#{$imgName}-#{map_get($grid-breakpoints-numbers, sm)}w@#{$ratio}x.#{$imgExtention}");
+  @media (-webkit-max-device-pixel-ratio: $ratio), (max-resolution: #{$ratio}dppx) {
+    @include media-breakpoint-down(lg) {
+      background-image: url("#{$imgs-path}/#{$imgName}-#{map_get($grid-breakpoints-numbers, xl)}w@#{$ratio}x.#{$imgExtention}");
+    }
+    @include media-breakpoint-down(md) {
+      background-image: url("#{$imgs-path}/#{$imgName}-#{map_get($grid-breakpoints-numbers, lg)}w@#{$ratio}x.#{$imgExtention}");
+    }
+    @include media-breakpoint-down(sm) {
+      background-image: url("#{$imgs-path}/#{$imgName}-#{map_get($grid-breakpoints-numbers, md)}w@#{$ratio}x.#{$imgExtention}");
+    }
+    @include media-breakpoint-down(xs) {
+      background-image: url("#{$imgs-path}/#{$imgName}-#{map_get($grid-breakpoints-numbers, sm)}w@#{$ratio}x.#{$imgExtention}");
+    }
   }
 }
