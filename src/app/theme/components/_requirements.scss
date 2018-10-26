@@ -1,7 +1,7 @@
 app-requirements {
   .app-section {
     background-image: url("#{$imgs-path}/bg-2@1x.jpg");
-    @include breakpoints-and-resolution-bg('bg-2', 'jpg', 2);
     @include breakpoints-and-resolution-bg('bg-2', 'jpg', 1);
+    @include breakpoints-and-resolution-bg('bg-2', 'jpg', 2);
   }
 }
