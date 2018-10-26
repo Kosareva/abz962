@@ -5,8 +5,8 @@
     font-style: $style;
     src: url('#{$file-path}.eot');
     src: url('#{$file-path}.eot?#iefix') format('embedded-opentype'),
-    url('#{$file-path}.woff2') format('font-woff2'),
-    url('#{$file-path}.woff') format('font-woff'),
+    url('#{$file-path}.woff2') format('woff2'),
+    url('#{$file-path}.woff') format('woff'),
     url('#{$file-path}.ttf') format('truetype');
   }
 }
