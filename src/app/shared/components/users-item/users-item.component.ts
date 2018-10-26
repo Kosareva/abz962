@@ -11,6 +11,9 @@ export class UsersItemComponent implements OnInit {
     @Input('title') title: string;
     @Input('text') text: string[];
 
+    defaultImage = './assets/imgs/icons/picture.svg';
+    offset = 100;
+
     constructor() {
     }
 

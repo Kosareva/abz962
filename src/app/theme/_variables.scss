@@ -18,8 +18,15 @@ $grid-breakpoints: (
         lg: 992px,
         xl: 1200px
 );
+$grid-breakpoints-numbers: (
+        xs: 0,
+        sm: 576,
+        md: 768,
+        lg: 992,
+        xl: 1200
+);
 $container-max-widths: (
-        sm:540px + $grid-gutter-width,
+        sm: 540px + $grid-gutter-width,
         md: 720px + $grid-gutter-width,
         lg: 960px + $grid-gutter-width,
         xl: 1140px + $grid-gutter-width

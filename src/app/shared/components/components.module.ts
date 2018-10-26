@@ -8,6 +8,7 @@ import {UsersItemComponent} from './users-item/users-item.component';
 import {FileInputComponent} from './file-input/file-input.component';
 import {RouterModule} from '@angular/router';
 import {MainMenuModule} from '@app/shared/components/main-menu/main-menu.module';
+import {LazyLoadImageModule} from 'ng-lazyload-image';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import {MainMenuModule} from '@app/shared/components/main-menu/main-menu.module'
         CommonModule,
         MainMenuModule,
         RouterModule,
+        LazyLoadImageModule,
     ],
     exports: [
         FileInputComponent,

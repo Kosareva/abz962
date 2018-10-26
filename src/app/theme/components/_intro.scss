@@ -1,6 +1,11 @@
 app-intro {
   .app-section {
-    background-image: url("#{$imgs-path}/bg-1.jpg");
     background-position: 0 32%;
+    background-image: url("#{$imgs-path}/bg-1@1x.jpg");
+    @include breakpoints-and-resolution-bg('bg-1', 'jpg', 2);
+    @include breakpoints-and-resolution-bg('bg-1', 'jpg', 1);
+    @include media-breakpoint-down(xs) {
+      background-position: 35% 0;
+    }
   }
 }

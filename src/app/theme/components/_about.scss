@@ -1,5 +1,5 @@
 app-about {
-  @include media-breakpoint-between(md,lg) {
+  @include media-breakpoint-between(md, lg) {
     app-icon-box {
       display: flex;
       flex-direction: row;
@@ -8,15 +8,4 @@ app-about {
       }
     }
   }
-  //@include media-breakpoint-down(md) {
-  //  app-icon-box {
-  //    *{
-  //      text-align: center;
-  //    }
-  //    display: flex;
-  //    align-items: center;
-  //    flex-direction: column;
-  //    justify-content: center;
-  //  }
-  //}
 }
