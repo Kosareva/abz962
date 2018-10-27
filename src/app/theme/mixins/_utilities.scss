@@ -1,22 +1,45 @@
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}
+
 @mixin clearfix() {
   content: "";
   clear: both;
   display: table;
 }
 
-@mixin breakpoints-and-resolution-bg($imgName, $imgExtention, $ratio) {
+@mixin resolution-up($ratio) {
+  @media (-webkit-min-device-pixel-ratio: $ratio), (min-resolution: #{$ratio}dppx) {
+    @content;
+  }
+}
+
+@mixin resolution-down($ratio) {
   @media (-webkit-max-device-pixel-ratio: $ratio), (max-resolution: #{$ratio}dppx) {
-    @include media-breakpoint-down(lg) {
-      background-image: url("#{$imgs-path}/#{$imgName}-#{map_get($grid-breakpoints-numbers, xl)}w@#{$ratio}x.#{$imgExtention}");
+    @content;
+  }
+}
+
+@mixin breakpoints-and-resolution-bg-img($img-name, $img-ext, $imgs-path, $resolution) {
+  @include resolution-up($resolution) {
+    background-image: url("#{$imgs-path}/#{$img-name}@1x.#{$img-ext}");
+    @include media-breakpoint-up(xs) {
+      background-image: url("#{$imgs-path}/#{$img-name}-#{strip-unit(map_get($grid-breakpoints, sm))}w@#{$resolution}x.#{$img-ext}");
     }
-    @include media-breakpoint-down(md) {
-      background-image: url("#{$imgs-path}/#{$imgName}-#{map_get($grid-breakpoints-numbers, lg)}w@#{$ratio}x.#{$imgExtention}");
+    @include media-breakpoint-up(sm) {
+      background-image: url("#{$imgs-path}/#{$img-name}-#{strip-unit(map_get($grid-breakpoints, md))}w@#{$resolution}x.#{$img-ext}");
     }
-    @include media-breakpoint-down(sm) {
-      background-image: url("#{$imgs-path}/#{$imgName}-#{map_get($grid-breakpoints-numbers, md)}w@#{$ratio}x.#{$imgExtention}");
+    @include media-breakpoint-up(md) {
+      background-image: url("#{$imgs-path}/#{$img-name}-#{strip-unit(map_get($grid-breakpoints, lg))}w@#{$resolution}x.#{$img-ext}");
     }
-    @include media-breakpoint-down(xs) {
-      background-image: url("#{$imgs-path}/#{$imgName}-#{map_get($grid-breakpoints-numbers, sm)}w@#{$ratio}x.#{$imgExtention}");
+    @include media-breakpoint-up(lg) {
+      background-image: url("#{$imgs-path}/#{$img-name}-#{strip-unit(map_get($grid-breakpoints, xl))}w@#{$resolution}x.#{$img-ext}");
+    }
+    @include media-breakpoint-up(xl) {
+      background-image: url("#{$imgs-path}/#{$img-name}@#{$resolution}x.#{$img-ext}");
     }
   }
 }

@@ -5,7 +5,6 @@ import {HomeComponent} from '@app/views/home/home.component';
 const appRoutes: Routes = [
     {path: '', component: HomeComponent},
     {path: '**', redirectTo: ''},
-    // {path: '**', loadChildren: '@app/views/error-page/error-page.module#ErrorPageModule'},
 ];
 
 @NgModule({

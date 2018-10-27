@@ -1,8 +1,10 @@
 app-header {
   background: $body-bg;
+  position: relative;
+  display: block;
   .app-header {
-    position: -webkit-sticky;
-    position: sticky;
+    width: 100%;
+    position: fixed;
     top: 0;
     background: $body-bg;
     z-index: $zindex-sticky;
