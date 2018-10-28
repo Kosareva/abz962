@@ -4,7 +4,7 @@ app-intro {
     @include media-breakpoint-down(xs) {
       background-position: 35% 0;
     }
-    @include breakpoints-and-resolution-bg-img(bg-1, jpg, $imgs-path, 1);
+    @include breakpoints-bg-img(bg-1, jpg, $imgs-path);
     @include breakpoints-and-resolution-bg-img(bg-1, jpg, $imgs-path, 2);
   }
 }

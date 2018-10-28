@@ -1,6 +1,6 @@
 app-requirements {
   .app-section {
-    @include breakpoints-and-resolution-bg-img(bg-2, jpg, $imgs-path, 1);
+    @include breakpoints-bg-img(bg-2, jpg, $imgs-path);
     @include breakpoints-and-resolution-bg-img(bg-2, jpg, $imgs-path, 2);
   }
 }

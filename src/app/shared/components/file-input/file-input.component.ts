@@ -1,76 +1,97 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, forwardRef, Input, ViewChild} from '@angular/core';
+import {ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {
+    acceptFileTypes,
+    fileMaxSize,
+    fileMinSize,
+    fileResolutionValidator
+} from '@app/shared/components/file-input/validators/file-input.validators';
 
 @Component({
     selector: 'app-file-input',
     templateUrl: './file-input.component.html',
     styleUrls: ['./file-input.component.scss'],
-})
-export class FileInputComponent implements OnInit {
-
-    @ViewChild('fileInput') fileInput: ElementRef;
-    @Input() placeholder = 'Choose file';
-    @Output() changeEvent = new EventEmitter();
-    fileName: string;
-
-    @Input()
-    set change(val) {
-        switch (val) {
-            case 'clear':
-                setTimeout(() => {
-                    this.deleteFile();
-                }, 0);
-                break;
-            case 'markAsUntouched':
-                setTimeout(() => {
-                    this.markAsUntouched();
-                }, 0);
-                break;
-            case 'markAsTouched':
-                setTimeout(() => {
-                    this.markAsTouched();
-                }, 0);
-                break;
-            default:
-                break;
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FileInputComponent),
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useValue: fileMaxSize,
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useValue: fileMinSize,
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useValue: acceptFileTypes,
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useValue: fileResolutionValidator,
+            multi: true
         }
+    ]
+})
+export class FileInputComponent implements ControlValueAccessor {
+
+    @ViewChild('originalFile') originalFile: ElementRef;
+    @Input('placeholder') placeholder = 'Choose file';
+    file: File;
+    fileName: string = this.placeholder;
+
+    onChange = (file: File) => {
+    };
+
+    onTouched = () => {
+    };
+
+    get value(): File {
+        return this.file;
     }
 
-    constructor(
-        private renderer: Renderer2,
-        private elRef: ElementRef,
-    ) {
+    upload(file: File) {
+        this.writeValue(file);
     }
 
-    deleteFile() {
-        this.renderer.setProperty(this.fileInput.nativeElement, 'value', null);
-        this.fileName = this.placeholder;
-        this.changeEvent.emit();
-    }
-
-    ngOnInit() {
-        this.fileName = this.placeholder;
-    }
-
-    onChange(events) {
-        if (events.target.files.length) {
-            this.fileName = events.target.files[0].name;
+    writeValue(file: File): void {
+        this.file = file;
+        if (file) {
+            this.fileName = file.name;
         } else {
             this.fileName = this.placeholder;
         }
+        this.onChange(this.value);
     }
 
-    trigger() {
-        this.fileInput.nativeElement.click();
+    registerOnChange(fn: (file: File) => void) {
+        this.onChange = fn;
     }
 
-    private markAsTouched() {
-        this.renderer.addClass(this.elRef.nativeElement, 'ng-touched');
-        this.renderer.removeClass(this.elRef.nativeElement, 'ng-untouched');
+    registerOnTouched(fn: () => void) {
+        this.onTouched = fn;
     }
 
-    private markAsUntouched() {
-        this.renderer.addClass(this.elRef.nativeElement, 'ng-untouched');
-        this.renderer.removeClass(this.elRef.nativeElement, 'ng-touched');
+    deleteFile() {
+        this.writeValue(null);
+    }
+
+    onChangeOriginalFile(event) {
+        if (event.target.files.length) {
+            this.writeValue(event.target.files[0]);
+        } else {
+            this.writeValue(null);
+        }
+    }
+
+    triggerFileClick() {
+        this.originalFile.nativeElement.click();
     }
 
 }

@@ -11,7 +11,7 @@ export class RegistrationForm implements RegistrationFormModel {
     email: string;
     phone: string;
     position_id: number;
-    photo: File;
+    photo: File | FileList;
 
     constructor({
                     name = null,
@@ -26,14 +26,16 @@ export class RegistrationForm implements RegistrationFormModel {
         this.position_id = position_id;
         if (photo instanceof FileList && photo.length) {
             this.photo = photo[0];
+        } else if (photo instanceof File) {
+            this.photo = photo;
         } else {
             this.photo = null;
         }
     }
 
     static createFormData(formValue: RegistrationFormModel) {
-        let form = new RegistrationForm(formValue);
-        let formData = new FormData();
+        const form = new RegistrationForm(formValue);
+        const formData = new FormData();
         Object.keys(form).forEach(key => {
             formData.append(key, form[key]);
         });
