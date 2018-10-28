@@ -7,10 +7,10 @@
                 <h2 class="text-center">Our cheerful users</h2>
                 <h5 class="text-center">Attention! Sorting users by registration date</h5>
             </div>
-            <div class="w-100 mb-5"></div>
+            <div class="w-100 mb-4 mb-sm-5"></div>
             <ng-container *ngIf="(applicantsState$ | async).applicants as applicants">
                 <app-users-item
-                        class="col-12 col-md-4 mb-5"
+                        class="col-12 col-md-4 mb-4 mb-sm-5"
                         *ngFor="let applicant of applicants"
                         [src]="applicant.photo"
                         [title]="applicant.name"

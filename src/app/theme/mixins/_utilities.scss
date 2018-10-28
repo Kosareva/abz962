@@ -23,23 +23,27 @@
   }
 }
 
+@mixin breakpoints-bg-img($img-name, $img-ext, $imgs-path, $resolution: 1) {
+  background-image: url("#{$imgs-path}/#{$img-name}@#{$resolution}x.#{$img-ext}");
+  @include media-breakpoint-up(xs) {
+    background-image: url("#{$imgs-path}/#{$img-name}-#{strip-unit(map_get($grid-breakpoints, sm))}w@#{$resolution}x.#{$img-ext}");
+  }
+  @include media-breakpoint-up(sm) {
+    background-image: url("#{$imgs-path}/#{$img-name}-#{strip-unit(map_get($grid-breakpoints, md))}w@#{$resolution}x.#{$img-ext}");
+  }
+  @include media-breakpoint-up(md) {
+    background-image: url("#{$imgs-path}/#{$img-name}-#{strip-unit(map_get($grid-breakpoints, lg))}w@#{$resolution}x.#{$img-ext}");
+  }
+  @include media-breakpoint-up(lg) {
+    background-image: url("#{$imgs-path}/#{$img-name}-#{strip-unit(map_get($grid-breakpoints, xl))}w@#{$resolution}x.#{$img-ext}");
+  }
+  @include media-breakpoint-up(xl) {
+    background-image: url("#{$imgs-path}/#{$img-name}@#{$resolution}x.#{$img-ext}");
+  }
+}
+
 @mixin breakpoints-and-resolution-bg-img($img-name, $img-ext, $imgs-path, $resolution) {
   @include resolution-up($resolution) {
-    background-image: url("#{$imgs-path}/#{$img-name}@1x.#{$img-ext}");
-    @include media-breakpoint-up(xs) {
-      background-image: url("#{$imgs-path}/#{$img-name}-#{strip-unit(map_get($grid-breakpoints, sm))}w@#{$resolution}x.#{$img-ext}");
-    }
-    @include media-breakpoint-up(sm) {
-      background-image: url("#{$imgs-path}/#{$img-name}-#{strip-unit(map_get($grid-breakpoints, md))}w@#{$resolution}x.#{$img-ext}");
-    }
-    @include media-breakpoint-up(md) {
-      background-image: url("#{$imgs-path}/#{$img-name}-#{strip-unit(map_get($grid-breakpoints, lg))}w@#{$resolution}x.#{$img-ext}");
-    }
-    @include media-breakpoint-up(lg) {
-      background-image: url("#{$imgs-path}/#{$img-name}-#{strip-unit(map_get($grid-breakpoints, xl))}w@#{$resolution}x.#{$img-ext}");
-    }
-    @include media-breakpoint-up(xl) {
-      background-image: url("#{$imgs-path}/#{$img-name}@#{$resolution}x.#{$img-ext}");
-    }
+    @include breakpoints-bg-img($img-name, $img-ext, $imgs-path, $resolution);
   }
 }

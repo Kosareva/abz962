@@ -56,13 +56,19 @@
             <app-file-input
                     class="form-control form-control-lg"
                     formControlName="photo"
-                    [placeholder]="'Upload your photo'"
-                    (changeEvent)="onFileClear()"
-                    [change]="changeFile"
-            ></app-file-input>
-            <div class="invalid-feedback" *ngIf="form.get('photo').errors && fileTouched">
-                <p>
-                    Photo required, must be less than 5MB, min resolution 70x70, of format image/jpeg, image/jpg</p>
+                    [placeholder]="'Upload photo'">
+            </app-file-input>
+            <div class="invalid-feedback" *ngIf="!form.get('photo').valid && form.get('photo').touched">
+                <p *ngIf="form.get('photo').hasError('required')">Photo required</p>
+                <p *ngIf="form.get('photo').hasError('sizeError')">Photo must be
+                    {{form.get('photo').errors.sizeError.expected}}. <br> Actual size:
+                    {{form.get('photo').errors.sizeError.size}}</p>
+                <p *ngIf="form.get('photo').hasError('typeError')">Allowed types:
+                    {{form.get('photo').errors.typeError.expected}}.
+                    <br> Actual type: {{form.get('photo').errors.typeError.type}}</p>
+                <p *ngIf="form.get('photo').hasError('resolutionError')">Resolution must be
+                    {{form.get('photo').errors.resolutionError.expected}}.
+                    <br> Actual resolution: {{form.get('photo').errors.resolutionError.resolution}}</p>
             </div>
         </div>
     </div>

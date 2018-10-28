@@ -1,25 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {from, fromEvent, interval, Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import * as fromApp from '@app/store/app.reducers';
 import * as fromPositions from '@app/views/home/registration/store/positions.reducers';
 import * as PositionsActions from '@app/views/home/registration/store/positions.actions';
+import * as AuthActions from '@app/core/auth/store/auth.actions';
 import {FormBuilder, Validators} from '@angular/forms';
 import {
     EMAIL_PATTERN,
     PHONE_PATTERN,
-    accept,
     isInteger,
     isString,
-    maxSize,
-    minResolution,
-    required,
-    single
 } from '@app/shared/validators/validators';
+import {acceptFileTypes, fileMaxSize, fileResolutionValidator} from '@app/shared/components/file-input/validators/file-input.validators';
 import {RegistrationForm, RegistrationFormModel} from '@app/views/home/registration/registration-form/registration-form.model';
-import * as AuthActions from '@app/core/auth/store/auth.actions';
 import {ToastrService} from 'ngx-toastr';
-import {concatMap, flatMap, map, switchMap, take} from 'rxjs/operators';
+
 
 @Component({
     selector: 'app-registration-form',
@@ -28,8 +24,6 @@ import {concatMap, flatMap, map, switchMap, take} from 'rxjs/operators';
 })
 export class RegistrationFormComponent implements OnInit {
 
-    changeFile: string;
-    fileTouched = false;
     positionsState$: Observable<fromPositions.State>;
     form = this.fb.group({
         name: ['', [
@@ -53,12 +47,13 @@ export class RegistrationFormComponent implements OnInit {
             isInteger(),
             Validators.min(1)
         ]],
-        photo: ['', Validators.compose([
-            required(),
-            single(),
-            maxSize(5),
-            accept(['image/jpeg', 'image/jpg']),
-        ]), minResolution(70, 70).bind(this)]
+        photo: ['', [
+            Validators.required,
+            fileMaxSize(5),
+            acceptFileTypes(['image/jpeg']),
+        ],
+            fileResolutionValidator('min', 70, 70).bind(this)
+        ]
     });
 
     constructor(
@@ -73,11 +68,6 @@ export class RegistrationFormComponent implements OnInit {
         this.positionsState$ = this.store.select('positions');
     }
 
-    onFileClear() {
-        this.clearFile();
-        this.markAsTouchedFile();
-    }
-
     onSubmit() {
         const formData = RegistrationForm.createFormData(<RegistrationFormModel>this.form.value);
         if (!this.form.valid) {
@@ -87,43 +77,25 @@ export class RegistrationFormComponent implements OnInit {
         }
         this.store.dispatch(new AuthActions.TrySignup(formData));
         this.clearForm();
-        this.markAsUntouchedAll();
     }
 
     private clearForm() {
         Object.keys(this.form.controls).forEach(key => {
             this.form.get(key).setValue('');
         });
-        this.clearFile();
-    }
-
-    private clearFile() {
-        this.form.get('photo').setValue('');
-        this.changeFile = 'clear';
+        this.markAsUntouchedAll();
     }
 
     private markAsTouchedAll() {
         Object.keys(this.form.controls).forEach(key => {
             this.form.get(key).markAsTouched();
         });
-        this.markAsTouchedFile();
-    }
-
-    private markAsTouchedFile() {
-        this.changeFile = 'markAsTouched';
-        this.fileTouched = true;
     }
 
     private markAsUntouchedAll() {
         Object.keys(this.form.controls).forEach(key => {
             this.form.get(key).markAsUntouched();
         });
-        this.markAsUntouchedFile();
-    }
-
-    private markAsUntouchedFile() {
-        this.changeFile = 'markAsUntouched';
-        this.fileTouched = false;
     }
 
 }

@@ -13,7 +13,7 @@
 }
 
 @include media-breakpoint-down(lg) {
-  .app-section:not(.app-section-internal) {
+  .app-section {
     padding-top: $grid-gutter-width * 4;
     padding-bottom: $grid-gutter-width * 4;
     &-internal {
@@ -24,8 +24,8 @@
 
 @include media-breakpoint-down(sm) {
   .app-section {
-    padding-top: $grid-gutter-width * 2;
-    padding-bottom: $grid-gutter-width * 2;
+    padding-top: ($grid-gutter-width * 2);
+    padding-bottom: ($grid-gutter-width * 2);
     &-internal {
       padding-bottom: 0;
     }

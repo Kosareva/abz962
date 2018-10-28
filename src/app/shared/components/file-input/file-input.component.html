@@ -1,11 +1,11 @@
-<input type="file" #fileInput (change)="onChange($event)">
+<input type="file" #originalFile (click)="onTouched()" (change)="onChangeOriginalFile($event)">
 <span class="app-file-input__file-name">{{fileName}}</span>
 <div class="app-file-input__btns-container">
-    <button *ngIf="fileInput.files.length" type="button" class="btn btn-link btn-delete" (click)="deleteFile()">x
+    <button *ngIf="file" type="button" class="btn btn-link btn-delete" (click)="deleteFile()">x
     </button>
     <button type="button" class="btn btn-outline-primary btn-upload d-none d-md-block btn-upload"
-            (click)="trigger()">Upload
+            (click)="triggerFileClick()">Upload
     </button>
     <button type="button" class="btn btn-outline-primary icon-upload d-md-none btn-upload"
-            (click)="trigger()"></button>
+            (click)="triggerFileClick()"></button>
 </div>
