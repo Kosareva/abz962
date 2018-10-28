@@ -18,7 +18,8 @@ app-users-item {
 .app-users-item {
   &__ {
     &title {
-      word-break: break-word;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
